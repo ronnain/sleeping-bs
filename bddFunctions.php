@@ -40,16 +40,6 @@ class Comment {
     public $repliesComment;
 }
 
-/* function setComment($id, $firstName, $comment, $date, $articleId, $mainCommentId){
-    $comment = new Comment();
-    $comment->id = $id;
-    $comment->firstName = $firstName;
-    $comment->comment = $comment;
-    $comment->date = $date;
-    $comment->articleId = $articleId;
-    $comment->mainCommentId = $mainCommentId;
-    return $comment;
-} */
 
 function getComments($articleId) {
     $comments = array();

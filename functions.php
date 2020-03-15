@@ -20,15 +20,24 @@ function handleGetComments() {
         echo 'fail retrieving parameters';
         return;
     }
-    getComments(1);
+    getComments($_REQUEST['articleId']);
 }
 
 function handleAddComment() {
-    if (!isset($_REQUEST['firstName']) || !isset($_REQUEST['comment']) || !isset($_REQUEST['articleId'])) {
+    // Takes raw data from the request
+    $json = file_get_contents('php://input');
+    // Converts it into a PHP object
+    $data = json_decode($json);
+    $comment = $data->comment;
+
+    if (!property_exists($comment, 'firstName') ||
+        !property_exists($comment, 'comment') ||
+        !property_exists($comment, 'articleId')) {
+
         echo 'fail retrieving parameters';
         return;
     }
-    $mainCommentId = isset($_REQUEST['mainCommentId']) ? $_REQUEST['mainCommentId'] : null;
+    $mainCommentId = property_exists($comment, 'mainCommentId') ? $comment->mainCommentId : null;
 
-    addComment($_REQUEST['firstName'], $_REQUEST['comment'], $_REQUEST['articleId'], $mainCommentId);
+    addComment($comment->firstName, $comment->comment, $comment->articleId, $mainCommentId);
 }
