@@ -28,16 +28,15 @@ function handleAddComment() {
     $json = file_get_contents('php://input');
     // Converts it into a PHP object
     $data = json_decode($json);
-    $comment = $data->comment;
 
-    if (!property_exists($comment, 'firstName') ||
-        !property_exists($comment, 'comment') ||
-        !property_exists($comment, 'articleId')) {
+    if (!property_exists($data, 'firstName') ||
+        !property_exists($data, 'comment') ||
+        !property_exists($data, 'articleId')) {
 
         echo 'fail retrieving parameters';
         return;
     }
-    $mainCommentId = property_exists($comment, 'mainCommentId') ? $comment->mainCommentId : null;
+    $mainCommentId = property_exists($data, 'mainCommentId') ? $data->mainCommentId : null;
 
-    addComment($comment->firstName, $comment->comment, $comment->articleId, $mainCommentId);
+    addComment($data->firstName, $data->comment, $data->articleId, $mainCommentId);
 }
