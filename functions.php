@@ -1,14 +1,22 @@
 <?php
 require 'bddFunctions.php';
+require 'mail.php';
 
 function handleContactCreation() {
-    echo $_POST['method'];
-    if(!isset($_POST['firstName']) || !isset($_POST['mail'])){
+    // Takes raw data from the request
+    $json = file_get_contents('php://input');
+    // Converts it into a PHP object
+    $data = json_decode($json);
+    $mailData = $data->mail;
+
+    if (!property_exists($mailData, 'firstName') ||
+        !property_exists($mailData, 'mail')) {
         echo 'fail retrieving parameters';
         return null;
     }
 
-    createContact($_POST['firstName'], $_POST['mail']);
+    createContact($mailData->firstName, $mailData->mail);
+    sendBonus($mailData->firstName, $mailData->mail);
 }
 
 function handleGetContacts() {

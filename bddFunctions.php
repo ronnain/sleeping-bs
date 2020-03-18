@@ -27,7 +27,7 @@ function createContact($firstName, $mail) {
         'firstName' => $firstName,
         'mail' => $mail
         ));
-    echo 'Contact ajouté !';
+    // echo 'Contact ajouté !';
 }
 
 class Comment {
