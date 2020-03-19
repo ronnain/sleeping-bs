@@ -27,7 +27,6 @@ function createContact($firstName, $mail) {
         'firstName' => $firstName,
         'mail' => $mail
         ));
-    // echo 'Contact ajouté !';
 }
 
 class Comment {
@@ -96,5 +95,5 @@ function addComment($firstName, $comment, $articleId, $mainCommentId = null) {
         'mainCommentId' => $mainCommentId,
         'articleId' => $articleId
         ));
-    print $bdd->lastInsertId();
+    echo '{ "success":' . $bdd->lastInsertId() . '}';
 }

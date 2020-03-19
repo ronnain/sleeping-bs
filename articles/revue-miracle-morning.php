@@ -1,0 +1,127 @@
+<?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+header('Access-Control-Allow-Headers: responsetype');
+?>
+<!-- Corriger les fautes
+    Mettre lien du lien-->
+<h1>Comment devenir la personne que l'on souhaite avec le livre Miracle Morning?</h1>
+<img class="imgBook" src="assets/img/miracleMorning.jpg" alt="Livre Miracle Morning par Hal Elrod">
+<p>Vous avez dèjà lu des conseilles en développement personnel mais vous ne parvenez pas à les mettre en pratique par manque de temps ?
+Dans le livre, Miracle Morning, Hal Elrod propose une méthode pour se lever plus tôt afin de mettre en place des habitudes pour réussir dans tous les domaines de la vie.
+Je propose dans cet article une revue de son livre.
+</p>
+<h2>Hal Elrod (l'auteur) son histoire hors du commun</h2>
+<h3>L'accident</h3>
+<p>Dans son livre, Hal Elrod raconte son hsitoire et comment est née son livre.
+Avant d'avoir créer Miracle Morning, Hal Elrod était un commercial ayant beaucoup de succès. Il raconte qu'avec beaucoup de travail, il a battu plusieurs records de vente et son ambition ne s'arrêtait pas là.
+Mais après une soirée durant laquel il reçu un standing ovation, il a été victime d'un grave accident de la route. L'handicapant plusieurs années.
+</p>
+<p>
+Il décide de se prendre en main, il reprant son travail et bien qu'il est été en rééducation, il fait sa meilleur année de vente. Il décide ensuite de ranconter son histoire afin d'inspirer les gens et de partager les lessons de la vie qu'il a apprit lorsqu'il était vulnérable.
+Il écrit ensuite un premier livre mais il rencontre des difficultés à le rédiger. Concernant sa vie professionel, il est pour la seconde année consécutive dans le top des des meilleurs vendeurs.
+Puis, il devient manager et son équipe devient la meilleur équipe de l'entreprise. Il décide devenir coach en motivation.
+</p>
+<p>Il sent qu'il n'a pas encore atteint son plein potentiel et décide de doubler les objectifs de vente de son équipe et d'écrire un livre.
+Ce qu'il réussit dans l'année.
+Son premier livre est "Taking Life Heand On...", est classé dans le top 10 des meilleurs ventes sur Amazon. Malheureusement pour lui, son éditeur lui vola tous ces bénéfices et personne ne le retrouva.
+Mais, il retien ses leçons de son accident et apprend de ses erreurs.
+Il se consacre essentiellement en tant que business coach.
+</p>
+<h3>Deuxième descente aux enferts</h3>
+<p>Bien qu'il est beaucoup de succès la crise de 2007 aux Etats-unis, lui fit perdre tous ses clients et il se retrouva avec une grosse dète d'argent.
+Malgré ses tentative pour remonter, il était au bout et se décrit comme étant plus désespérer qu'après son accident de voiture. Mentallement, émotionnellement et financièrement cassé.
+Jusqu'au jour où un de ses amis, lui consseilla d'aller courir à son réveil bien qu'il détestait ça. Pendant sa course, il décide d'écouter un podcast de développement personnel. C'est à ce moment qu'il eu une révélation qui va faire naître Miracle Morning.
+</p>
+<p class="citation">"Votre niveau de succès va rarement dépasser votre niveau de développement personnel. Car, le succès est quelque chose que l'on attire par la personne que l'on devient."par Jim Rohn.</p>
+
+<h2>Devenir la personne que l'on souhaite</h2>
+<p>Il constate que la majorité des personnes se résigne à vivre une vie médiocre et passive, en accpetant ce que la vie leur donne.
+Même ceux ayant réussit dans un domaine, se laissent vivre médiocrement dans un autre domaine.
+Selon lui, rien ne nous empêche de réussir simmultanément dans tous les domaines de la vie (Santé, Amour, Travail, Etre heureux, Prosper...).
+</p>
+<p>Pour mesurer son niveau de réussit dans un domaine, il faut donner une note sur 10. Cette note est personnel.
+Mais, selon lui personne ne peut donner une note de 7/10 à sa santé et dire qu'il n'a pas envie d'être en meilleur santé.
+L'auteur propose donc une routine matinal qui va nous permettre d'atteindre ce fameux 10/10 dans tous les domaines de notre vie.
+Cela va aussi avoir un impacte positif sur tout notre entourage, familles, collègues, amis, clients...
+</p>
+<p class="citation">"La plus grosse aventure que l'on peut un jour vivre, est de vivre la vie de ses rêves" par Oprah</p>
+<p>La condition, pour réussir est de dédier une petite périodde le matin afin devenir la personne que l'on souhaite.
+Effectuer cette routine le matin, va directement imapcter la journée, on se sera plus productif, plus concentré, faire des choix en accord avec ces objectifs...
+</p>
+<h3>Se réveiller tous les matins comme si c'était noël</h3>
+<p>Peut être n'êtes vous pas du matin, mais mettre en place la routine qui est présentée plus loin dans l'article. Va vous permettre de vous réveiller tous les matins avec une énergie débordante, de diminuer le stress, d'améliorer votre santé et d'avoir la meilleur condition physique...
+Les premières matinées seront les plus difficiles, mais vous sentirez rapidement les bénéfices de la routine matinale et vous persévérez jusqu'à que celle ci soit confortable et habituelle.
+une fois la routine mise en place, les matins où vous ne pourrez pas l'effectuer, vous sentirez un manque ou une gène dans votre quotidien.
+</p>
+<p>Pour préparer son réveil, l'auteur propose de réciter plusieurs fois le soir avant de dormir une phrase affirmative.
+Cette phrase ressemble à celle-ci:
+</p>
+<p class="citation">"Je remercie mon corps de dormir 6h cette nuit. Je me sentirai en pleine forme et pleine forme à mon réveil et prêt à faire la routine matinale."</p>
+<p>D'après ses rechecherces et ses expériences, la durée de sommeil dépend de chacun mais il a remarqué que si l'on souhaite dormir 5h par exemple et que l'on se convainc que l'on va être en forme en se levant. Alors cela va se produire.
+Se conditionner à se lever le matin en pleine forme est donc un pilier pour mettre en place Miracle Morning.
+Hal Elrod propose des astuces au réveils pour se lever que je ne citerai pas cet article.
+</p>
+
+<h2>Miracle Morning</h2>
+<p>Miracle Morning, va se dérouler sur 1 heure. Pendant une heure, il faut effecturer différentes activités de developpement personnel. Toutes ayant un but différents et apportant beaucoup à chacun.
+Faire du développement personnel pendnat 1h quotidiennement va forcément avoir un impacte énorme sur sa santé et ses objectifs. Toutes les activités sont bénéfiques à l'individue et sont généralement recommandées pour se sentir mieux et réussir.
+Mais le problème, est qu'on n'a pas forcément la motivation et l'énergie de faire ça en rentrant le soir.
+D'où la solution de la l'auteur d'effectuer ses activités le matin.
+</p>
+<h3>Activités à réaliser</h3>
+<ul>
+    <li>La méditation, si vous ne savez pas comment méditer. Asseilelz vous confortablement et concentrer vous sur votre respiration. Quand vous vous mettez à penser quelque chose, essayer de vous rendre compte de ça et de se détacher de la penser en revenant sur votre respiration.
+        Cela va permettre de vous mettre dans un état de paix intérieur.
+    </li>
+    <li>La lecture, lire un livre de développement personnel par exemple. Avoir ainsi des idées que l'on pourra utilisés au quotidien.
+        En plus de ça, la lecture à de profond effets bénéfiques sur le cerveau et sa longévité.
+    </li>
+    <li>Les affirmations, se répéter des affiramtions que l'on personnalise à ses objectifs. Cela va permettre de gagner en confiance et de se diriger vers ses objectifs.
+    </li>
+    <li>La visualisation, souvent les plus grands athlètes utilise cet outils, se voir en train de réussir.</li>
+    <li>Ecrire, ce peut être sur n'importe quoi. Par exemple, noter ce que l'on a appris la veil dans un agenda. Revenir dessus va permettre de voir son évolution dans l'année.</li>
+    <li>Faire de l'exerccie, par exemple courir. En plus des effets bénéfiques du sport cela va permettre d'être pleinementa ctif pour démarrer la journée.</li>
+</ul>
+<p>Toutes ces activités sont à faire pendnat 10min chacune. Il n'y a pas de secret c'est la régularité qui apportera des résultats.</p>
+
+Mon avis sur le livre
+composition
+la communauté
+les effets sur le sommeil et sur le sloups
+<h2>Mon avis sur le livre</h2>
+<h3>La communauté</h3>
+<p>On retouve beaucoup de témoignages de personnes ayant mis en place la routine du livre avec succès. Toutes ces personnes en semblent satifaitent. Et c'est un excellent gage de confiance.
+L'auteur a aussi créé une page facebook pour rassembler sa communauté. Je trouve que c'est un bel état d'esprit.
+</p>
+<h3>Durée de sommeil</h3>
+<p>Là où j'aimerai apporté ma vision est sur la durée minimale du sommeil  pour être en bonne santé qui n'est pas évoquée dans le livre. Bien que l'auteur propose des méthodes pour se sentir en forme en se réveillant.
+Le corps à besoin d'un minimum de cycles pour récupérer aussi bien physiquement que mentalement. Les derniers cycles sont particulièrement important dans l'apprentissage.
+Ca dépend de chacun mais je pense, que viser 7h30 de sommeil est sage pour notre santé sur le long terme. Cela permet de réaliser 5 cycles de sommeils et c'est ce qui est recommandé.
+A l'inverse, dormir plus de 9h à montré que ce n'était pas bénéfique pour la santé.
+</p>
+
+<h3>Contenu</h3>
+<p>Le livre a un contenu très motivant. Dans sa globalité, je le décomposerai comme ça:  </p>
+<ul>
+    <li>1/3 du livre a pour objectif de nous motiver</li>
+    <li>1/3 du livre a présente l'histoire de l'auteur et comment est née Miracle Morning</li>
+    <li>1/3 du livre présente la méthode, les outils et des réflexions pour aller plus loin</li>
+</ul>
+<p>Personnellement, je n'ai pas trop apprécier d'avoir autant de contenu pour motiver. Je trouvais ça un peu répétitif et ça ne me parlais pas.
+Par contre, j'ai adoré son approche et sa réflexion pour élaborer la méthode.
+</p>
+<h3>Livre de développement personnel</h3>
+<p>Le livre ne traite que très peu du sommeil et reste très superficiel sur le sommeil.
+Je le considère plus comme un livre de développement personnel, avec un méthode très efficace.
+</p>
+<h2>Conclusion</h2>
+<p>Hal Elrod, apporte ici une véritable méthode de développment personnel. Qui d'après les pratqiuants semble très bien fonctionner.
+Si vous avez du mal à mettre en place des outils de développement personnel, ce livre est fait pour vous.
+Les exercices à effectuer sont excellents pour le santé physique et mentale. Ce n'est pas étonnant qu'elle donne autant de bons résultats.
+La lecture du livre est facile et motivante. On y retrouve de superbe citation inspirante. De plus n'est pas trop long à lire ce qui lui permet de garder un côté dynamique.
+Le point négatif est qu'il ne parle pas suffisament du sommeil et de son importance. Il tend à dire qu'on peut dormir moins et se sentir mieux, je pense qu'il faut faire attention à ce point là qui n'est pas forcément cohérent pour mener une vie saine.
+</p>
+<h3>Sources</h3>
+<p>Livre Miracle Morning écrit par le Hal Elrod.</p>
+<footer class="blockquote-footer">Ecrit le 03/01/2020 par <cite>Romain</cite></footer>
