@@ -50,8 +50,8 @@ function getComments($articleId) {
         //$comment = setComment($donnees['id'], $donnees['firstName'], $donnees['comment'], $donnees['date'], $donnees['articleId'], $donnees['mainCommentId']);
         $comment = new Comment();
         $comment->id = $donnees['id'];
-        $comment->firstName = $donnees['firstName'];
-        $comment->comment = $donnees['comment'];
+        $comment->firstName = htmlspecialchars($donnees['firstName']);
+        $comment->comment = htmlspecialchars($donnees['comment']);
         $comment->date = $donnees['date'];
         $comment->articleId = $donnees['articleId'];
         $comment->mainCommentId = $donnees['mainCommentId'];
@@ -65,8 +65,8 @@ function getComments($articleId) {
             }
             $replyComment = new Comment();
             $replyComment->id = $data['id'];
-            $replyComment->firstName = $data['firstName'];
-            $replyComment->comment = $data['comment'];
+            $replyComment->firstName = htmlspecialchars($data['firstName']);
+            $replyComment->comment = htmlspecialchars($data['comment']);
             $replyComment->date = $data['date'];
             $replyComment->articleId = $data['articleId'];
             $replyComment->mainCommentId = $data['mainCommentId'];

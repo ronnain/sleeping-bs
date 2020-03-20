@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: POST,GET,OPTIONS');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 
 if(isset($_REQUEST['method'])) {
-    $method = $_REQUEST['method'];
+    $method = htmlspecialchars($_REQUEST['method']);
     switch ($method) {
         case "createContact":
             handleContactCreation();

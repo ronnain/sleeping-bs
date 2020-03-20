@@ -15,7 +15,7 @@ function handleContactCreation() {
         return null;
     }
 
-    createContact($mailData->firstName, $mailData->mail);
+    createContact(htmlspecialchars($mailData->firstName), htmlspecialchars($mailData->mail));
     sendBonus($mailData->firstName, $mailData->mail);
 }
 
