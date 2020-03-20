@@ -6,7 +6,7 @@ require 'vendor/phpmailer/phpmailer/src/Exception.php';
 require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require 'vendor/phpmailer/phpmailer/src/SMTP.php';
 
-function sendBonus($firstName, $mailAdresse) {
+function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
 
     $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
     try {
@@ -47,10 +47,11 @@ function sendBonus($firstName, $mailAdresse) {
         //Content
         $mail->isHTML(true);
         //Set the subject line
-        $mail->Subject = 'PHPMailer GMail SMTP test';
+        $mail->Subject = "Bienvenue $firstName - Bonus Gratuit";
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        $mail->Body    = 'Bla bla bla vous trouverez ci-joint le bonus gratuit <b>in bold!</b><br>
+        <a href="http://localhost:4200/desabonnement/'.$unsubcribeKey.'">se désabonner</a>';
         //Replace the plain text body with one created manually
         $mail->AltBody = 'Ceci est un message texte';
 

@@ -15,8 +15,23 @@ function handleContactCreation() {
         return null;
     }
 
-    createContact(htmlspecialchars($mailData->firstName), htmlspecialchars($mailData->mail));
-    sendBonus($mailData->firstName, $mailData->mail);
+    $unsubcribeKey = createContact(htmlspecialchars($mailData->firstName), htmlspecialchars($mailData->mail));
+    sendBonus($mailData->firstName, $mailData->mail, $unsubcribeKey);
+}
+
+function handleUnsubscribe() {
+    // Takes raw data from the request
+    $json = file_get_contents('php://input');
+    // Converts it into a PHP object
+    $data = json_decode($json);
+
+    if (!$data || !property_exists($data, 'key')) {
+            echo "{ 'fail': true }";
+        return;
+    }
+    $unsubscribeKey = htmlspecialchars($data->key);
+    unsubscribeContact($unsubscribeKey);
+    echo '{ "success": true }';
 }
 
 function handleGetContacts() {

@@ -22,10 +22,28 @@ function createContact($firstName, $mail) {
         echo 'Echec de la connexion avec la base de données';
         return false;
     }
-    $req = $bdd->prepare('INSERT INTO contact(firstName, mail, creationDate) VALUES(:firstName, :mail, NOW())');
+
+    $unsubscribeKey = bin2hex(random_bytes(32));
+
+    $req = $bdd->prepare('INSERT INTO contact(firstName, mail, creationDate, unsubscribe) VALUES(:firstName, :mail, NOW(), :unsubscribe)');
     $req->execute(array(
         'firstName' => $firstName,
-        'mail' => $mail
+        'mail' => $mail,
+        'unsubscribe' => $unsubscribeKey
+        ));
+    return $unsubscribeKey;
+}
+
+function unsubscribeContact($unsubscribeKey) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $req = $bdd->prepare('UPDATE `contact` SET `subscribe`= false,`unsubscribeDate`= NOW() WHERE `unsubscribe` = :unsubscribe');
+    $req->execute(array(
+        'unsubscribe' => $unsubscribeKey
         ));
 }
 
