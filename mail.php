@@ -9,7 +9,7 @@ require 'config.php';
 
 function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
 
-    global $mailHost, $mailPort, $mailAdressServer, $mailPassWord;
+    global $mailHost, $mailPort, $mailAdressServer, $mailPassWord, $siteWebLink;
 
     $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
     try {
@@ -54,7 +54,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
         $mail->Body    = 'Bla bla bla vous trouverez ci-joint le bonus gratuit <b>in bold!</b><br>
-        <a href="http://localhost:4200/desabonnement/'.$unsubcribeKey.'">se désabonner</a>';
+        <a href= "'.$siteWebLink.'/desabonnement/'.$unsubcribeKey.'">se désabonner</a>';
         //Replace the plain text body with one created manually
         $mail->AltBody = 'Ceci est un message texte';
 
