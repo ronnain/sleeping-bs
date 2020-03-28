@@ -38,14 +38,14 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         //Password to use for SMTP authentication
         $mail->Password = $mailPassWord;
         //Set who the message is to be sent from
-        $mail->setFrom( $mailAdressServer, 'Romain');
+        $mail->setFrom( $mailAdressServer, 'Sommeil Profond');
         //Set an alternative reply-to address
         //$mail->addReplyTo('replyto@example.com', 'First Last');
 
         //Set who the message is to be sent to
         $mail->addAddress($mailAdresse, $firstName);
 
-        $mail->addAttachment('./bonus.txt', 'NewBonus.txt');
+        //$mail->addAttachment('./bonus.txt', 'NewBonus.txt');
 
         //Content
         $mail->isHTML(true);
@@ -53,10 +53,32 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         $mail->Subject = "Bienvenue $firstName - Bonus Gratuit";
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
-        $mail->Body    = 'Bla bla bla vous trouverez ci-joint le bonus gratuit <b>in bold!</b><br>
+        $mail->Body    = 'Bonjour '.$firstName.',<br/>
+        <br/>
+        Merci pour ton inscription.<br/>
+        À travers mon blog et ce bonus, j\'espère pouvoir t\'apporter les réponses que tu cherches.<br/>
+        <br/>
+        Excuse-moi, mais je n\'ai pas encore eu le temps de terminer la rédaction du bonus.<br/>
+        Le site est très récent (28/03/2020).<br/>
+        Je vais le terminer pour le dimanche 05/04/20.<br/>
+        Tu recevras un mail avec le bonus.<br/>
+        <br/>
+        A+<br/>
+        Romain<br/>
+        <br/>
+        <br/>
         <a href= "'.$siteWebLink.'/desabonnement/'.$unsubcribeKey.'">se désabonner</a>';
         //Replace the plain text body with one created manually
-        $mail->AltBody = 'Ceci est un message texte';
+        $mail->AltBody = "Bonjour ".$firstName.",
+        Merci pour ton inscription.
+        À travers mon blog et ce bonus, j'espère pouvoir t'apporter les réponses que tu cherches.
+
+        Excuse-moi, mais je n'ai pas encore eu le temps de terminer la rédaction du bonus.
+        Le site est très récent (28/03/2020).
+        Je vais le terminer pour le dimanche 05/04/20.
+        Tu recevras un mail avec le bonus.
+
+        Lien de désabonnement:".$siteWebLink."/desabonnement/".$unsubcribeKey;
 
         $mail->send();
         echo '{ "success": true }';
