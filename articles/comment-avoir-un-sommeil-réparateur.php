@@ -184,3 +184,5 @@ Comme l'envie d'aller dormir, de manger, de se reposer ...</p>
 <p>J'étais stupéfait des changements que mon apporter cette harmonie avec l'horloge interne.</p>
 
 <p>Je vous partagerai tout cela plus tard.</p>
+
+<footer class="blockquote-footer">Ecrit le 26/03/2020 par <cite>Romain</cite></footer>
