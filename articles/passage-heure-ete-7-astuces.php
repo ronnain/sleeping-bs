@@ -102,7 +102,7 @@ header('Access-Control-Allow-Headers: responsetype');
 	<ul>
 		<li><p>Je préviens mon entourage et je coupe mon portable, pour ne pas être dérangé pendant la séance.</p></li>
 		<li><p>Je lance un chronomètre de 5 min.</p></li>
-		<li><p>Je m'assis sur une chaise dans un endroit calme.</p></li>
+		<li><p>Je m'assois sur une chaise dans un endroit calme.</p></li>
 		<li><p>Je ferme les yeux.</p></li>
 		<li><p>Je me concentre sur ma respiration.</p></li>
 		<li><p>J'essaie d'avoir une respiration calme et profonde.</p></li>
@@ -130,14 +130,14 @@ header('Access-Control-Allow-Headers: responsetype');
 	<p>Peut-être un autre point sensible surtout chez des consommateurs de café.</p>
 	<p>Le café et le thé ont des répercussions plusieurs heures après l'ingestion.</p>
 	<p>On consomme le café et le thé pour sentir un coup de boost contre la fatigue.</p>
-	<p>Bien qu'on ne ressentte pas les effets très longtemps.</p>
+	<p>Bien qu'on ne ressente pas les effets très longtemps.</p>
 	<p>Le corps met beaucoup de temps à les éliminer et cela impacte d'autres fonctionnements dont le sommeil.</p>
 	<p>Le pire, c'est que l'on ne s'en rend pas compte. Surtout si on est habitué à en consommer.</p>
 	<br/>
 	<p>Pour cette période, je te recommande d'éviter le café et le thé.</p>
 	<p>Si tu ne peux pas faire sans, tu peux en prendre 1 tasse le matin.</p>
 
-	<p>Tu te sens fatigué l'après-midi? Cela ne sera que passager, au pire essaie de faire une sieste chronométré de 20min pas plus.</p>
+	<p>Tu te sens fatigué l'après-midi? Cela ne sera que passager, au pire essaie de faire une sieste chronométrée de 20min pas plus.</p>
 	<p>Sinon tu vas te réveiller déboussolé.</p>
 
 	<p class="citation">PS: Tu peux aussi consommer du café décaféiné et des infusions.</p>

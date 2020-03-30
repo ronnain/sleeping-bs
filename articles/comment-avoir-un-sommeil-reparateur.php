@@ -16,12 +16,12 @@ header('Access-Control-Allow-Headers: responsetype');
 <h2>Sommeil réparateur où es-tu?</h2>
 <p>Ayant eu pendant longtemps des problèmes de sommeil.</p>
 <p>Je me suis intéressé à comment je pouvais faire pour avoir un sommeil réparateur.</p>
-<p>Je voulais simplement me réveiller le matin avec toute mon énergie et en ayan récupéré des efforts de la veille.</p>
+<p>Je voulais simplement me réveiller le matin avec toute mon énergie et en ayant récupéré des efforts de la veille.</p>
 <p>Je me suis d'abord questionné sur l'effet réparateur du sommeil.</p>
 
 <h2>Comment le corps récupère ?</h2>
 
-<p>Lorsque l'on dort, le corps lance un processus de nettoyage qui élimine les toxines et autres déchets.</p>
+<p>Lorsque'on dort, le corps lance un processus de nettoyage qui élimine les toxines et autres déchets.</p>
 <p>C'est de là que viendrait la sensation de bien récupérer.</p>
 <p>Le corps se distingue en deux parties pour la gestion de l'élimination des déchets.
 <p>Le corps et le cerveau.</p>
@@ -35,8 +35,8 @@ header('Access-Control-Allow-Headers: responsetype');
 <p>Le système glymphatique va représenter un camion poubelle.</p>
 <p>Il va être alimenté par les éboueurs qui circulent dans l'espace entre les différentes cellules du cerveau à la recherche des déchets.</p>
 
-<p>Cette équipe d'éboueurs fonctionne 24h/24. Mais est 10 fois plus performante lorsque l'on dort.</p>
-<p>L'étude montre que lorsque l'on dort, l'espace entre les cellules augmente de 60%.</p>
+<p>Cette équipe d'éboueurs fonctionne 24h/24. Mais est 10 fois plus performante lorsqu'on' dort.</p>
+<p>L'étude montre que lorsqu'on dort, l'espace entre les cellules augmente de 60%.</p>
 <p>Ca permet aux éboueurs d'avoir plus de place pour chercher et transporter les poubelles. Ce qui leur rend la tâche bien plus facile.</p>
 <p>Dormir va donc permettre de rendre la tâche de nettoyage plus efficace.</p>
 
@@ -64,12 +64,12 @@ header('Access-Control-Allow-Headers: responsetype');
 <p>Tout au long de la journée nos tissus cellulaires comme les muscles se sont abîmés.</p>
 <p>Le sommeil joue un rôle essentiel pour la réparation de nos tissus.</p>
 <p>Comme le nettoyage des déchets, la réparation est d'autant plus efficace la nuit. D'une part car nous ne faisons plus d'activité physique qui abîme les tissus.</p>
-<p>Mais aussi parce que le corps va sécréter un cocktail d'hormone spécialement pour se réparer et se consolider.</p>
+<p>Mais aussi parce que le corps va sécréter un cocktail d'hormones spécialement pour se réparer et se consolider.</p>
 <p>Comme l'hormone de croissance, une des plus importante et puissante du corps.</p>
 
 <p>Voyons un peu quel est le rôle de l'hormone de croissance.</p>
 
-<p>Lorsque l'on est bébé, on sécr"te énormément d'hormone de croissance afin de nous aider à grandir.</p>
+<p>Lorsqu'on est bébé, on sécréte énormément d'hormone de croissance afin de nous aider à grandir.</p>
 <p>Puis à l'adolescence le corps produit un 2ième pic, encore une fois pour grandir.</p>
 <p>Ensuite, le corps continu à produire de l'hormone de croissance, mais à plus faible dose, pour se maintenir.</p>
 
@@ -94,7 +94,7 @@ header('Access-Control-Allow-Headers: responsetype');
 <p>Je suis totalement contre ce genre de pratique qui n'est pas bénéfique pour le bien-être et la bonne santé sur le long terme.</p>
 <p>De plus, les raisons d'un tel acte sont très souvent mesquines et hypocrites.</p>
 <p>Actuellement, on peut voir beaucoup d'influenceurs (homme et femme) du fitness qui se dopent, mais qui le cachent.</p>
-<p>Ils mettent en avant leurs résultats grâce à leur méthode d'entraînement et leur assiduitée...</p>
+<p>Ils mettent en avant leurs résultats grâce à leur méthode d'entraînement et leur assiduité...</p>
 <p>Bref attention à ce genre de personne. Vous n'aurez jamais leurs résultats et vous risquez de vous abîmer.</p>
 
 	<p class="citation">10% de sportifs amateurs sont dopés</p>
@@ -148,8 +148,8 @@ header('Access-Control-Allow-Headers: responsetype');
 <p>Eh bien, je vous dirai, c'est une excellente idée pour se saboter la santé.</p>
 
 <p>Beaucoup d'études démontrent un lien entre un manque de sommeil et le développement de maladies ainsi que la réduction de l'espérance de vie.</p>
-<p>Une étude faite sur des rats (<a rel="nofollow" target="_blank" href="https://www.ncbi.nlm.nih.gov/pubmed/9989363">ici</a>) montre qu'un groupe de rats privés du sommeil paradoxale vie en moyenne 3 semaines. Tandis que l'espérance de vie d'un rat est de 2/3ans.</p>
-<p>C'est quand même choquant. Bien sûr, nous ne sommes pas des rats, mais sommes-nous invulnérables au manque de sommeil pour autent?</p>
+<p>Une étude faite sur des rats (<a rel="nofollow" target="_blank" href="https://www.ncbi.nlm.nih.gov/pubmed/9989363">ici</a>) montre qu'un groupe de rats privés du sommeil paradoxal vie en moyenne 3 semaines. Tandis que l'espérance de vie d'un rat est de 2/3ans.</p>
+<p>C'est quand même choquant. Bien sûr, nous ne sommes pas des rats, mais sommes-nous invulnérables au manque de sommeil pour autant?</p>
 <p>Je ne parierai pas là-dessus.</p>
 
 <p>On a vu l'importance d'un sommeil de qualité ainsi qu'une bonne alimentation pour récupérer au mieux.</p>
@@ -169,7 +169,7 @@ header('Access-Control-Allow-Headers: responsetype');
 
 <p>De plus à l'heure de réveil de l'horloge interne. Les heures de sommeil supplémentaires que vous ferez ne sont pas très efficaces. C'est un sommeil de mauvaise qualité.</p>
 
-<p>C'est pourquoi je vous conseille, de favoriser au maximum une heure de coucher régulière. Sinon vous accepter de ne pas avoir un sommeil récupérateur comme il se doit.</p>
+<p>C'est pourquoi je vous conseille, de favoriser au maximum une heure de coucher régulière. Sinon vous acceptez de ne pas avoir un sommeil récupérateur comme il se doit.</p>
 
 <p>Choisir, c'est renoncer. Je vous informe et vous en faîtes ce que vous voulez.</p>
 
