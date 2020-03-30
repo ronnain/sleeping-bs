@@ -49,11 +49,12 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
 
         //Content
         $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
         //Set the subject line
         $mail->Subject = "Bienvenue $firstName - Bonus Gratuit";
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
-        $mail->Body    = 'Bonjour '.$firstName.',<br/>
+        $messageHTML =  'Bonjour '.$firstName.',<br/>
         <br/>
         Merci pour ton inscription.<br/>
         À travers mon blog et ce bonus, j\'espère pouvoir t\'apporter les réponses que tu cherches.<br/>
@@ -68,8 +69,11 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         <br/>
         <br/>
         <a href= "'.$siteWebLink.'/desabonnement/'.$unsubcribeKey.'">se désabonner</a>';
+
+        $mail->Body = $messageHTML;
+
         //Replace the plain text body with one created manually
-        $mail->AltBody = "Bonjour ".$firstName.",
+        $messageText = "Bonjour ".$firstName.",
         Merci pour ton inscription.
         À travers mon blog et ce bonus, j'espère pouvoir t'apporter les réponses que tu cherches.
 
@@ -79,6 +83,8 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         Tu recevras un mail avec le bonus.
 
         Lien de désabonnement:".$siteWebLink."/desabonnement/".$unsubcribeKey;
+
+        $mail->AltBody = $messageText;
 
         $mail->send();
         echo '{ "success": true }';
