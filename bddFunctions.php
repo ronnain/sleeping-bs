@@ -14,6 +14,8 @@ function getContacts() {
     echo '"done" : "ok"}';
 
     $response->closeCursor();
+    // Close connection in PDO
+    $bdd = null;
 }
 
 function createContact($firstName, $mail) {
@@ -31,6 +33,10 @@ function createContact($firstName, $mail) {
         'mail' => $mail,
         'unsubscribe' => $unsubscribeKey
         ));
+
+    // Close connection in PDO
+    $bdd = null;
+
     return $unsubscribeKey;
 }
 
@@ -45,6 +51,8 @@ function unsubscribeContact($unsubscribeKey) {
     $req->execute(array(
         'unsubscribe' => $unsubscribeKey
         ));
+    // Close connection in PDO
+    $bdd = null;
 }
 
 class Comment {
@@ -97,6 +105,8 @@ function getComments($articleId) {
     }
     echo json_encode($comments, JSON_PRETTY_PRINT);
     $response->closeCursor();
+    // Close connection in PDO
+    $bdd = null;
 }
 
 function addComment($firstName, $comment, $articleId, $mainCommentId = null) {
@@ -114,4 +124,66 @@ function addComment($firstName, $comment, $articleId, $mainCommentId = null) {
         'articleId' => $articleId
         ));
     echo '{ "success":' . $bdd->lastInsertId() . '}';
+    // Close connection in PDO
+    $bdd = null;
+}
+
+
+
+function getArticles() {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE 1");
+    $sth->execute();
+    $articlesArray = array();
+    while ($article = $sth->fetch(PDO::FETCH_ASSOC)) {
+        array_push($articlesArray, $article);
+    }
+    // Second param display the accents
+    echo json_encode($articlesArray, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    // Close connection in PDO
+    $bdd = null;
+}
+
+function getArticleByName($articleName) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` LIKE '$articleName'");
+    $sth->execute();
+    if ($article = $sth->fetch(PDO::FETCH_ASSOC)) {
+        // Second param display the accents
+        echo json_encode($article, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+    // Close connection in PDO
+    $bdd = null;
+}
+
+function getOrtherArticles($articleName) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` NOT LIKE '$articleName'");
+    $sth->execute();
+    $articlesArray = array();
+
+    while ($article = $sth->fetch(PDO::FETCH_ASSOC)) {
+        array_push($articlesArray, $article);
+    }
+
+    // Second param display the accents
+    echo json_encode($articlesArray, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+    // Close connection in PDO
+    $bdd = null;
 }

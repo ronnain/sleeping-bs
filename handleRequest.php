@@ -23,6 +23,15 @@ if(isset($_REQUEST['method'])) {
         case "addComment":
             handleAddComment();
             break;
+        case "getArticles":
+            handleGetArticles();
+            break;
+        case "getArticleByName":
+            handleGetArticleByName();
+            break;
+        case "getOtherArticles":
+            handleGetOrtherArticles();
+            break;
         default:
             echo 'No method found.';
     }

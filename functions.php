@@ -63,3 +63,23 @@ function handleAddComment() {
 
     addComment($data->firstName, $data->comment, $data->articleId, $mainCommentId);
 }
+
+function handleGetArticles() {
+    getArticles();
+}
+
+function handleGetArticleByName() {
+    if (!isset($_REQUEST['articleName'])) {
+        echo 'fail retrieving parameters';
+        return;
+    }
+    getArticleByName(htmlspecialchars($_REQUEST['articleName']));
+}
+
+function handleGetOrtherArticles() {
+    if (!isset($_REQUEST['articleName'])) {
+        echo 'fail retrieving parameters';
+        return;
+    }
+    getOrtherArticles(htmlspecialchars($_REQUEST['articleName']));
+}
