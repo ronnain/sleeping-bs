@@ -45,26 +45,33 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         //Set who the message is to be sent to
         $mail->addAddress($mailAdresse, $firstName);
 
-        //$mail->addAttachment('./bonus.txt', 'NewBonus.txt');
+        $mail->addAttachment('./bonus/Sommeil_Profond_Bonus.pdf');
 
         //Content
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
         //Set the subject line
-        $mail->Subject = "Bienvenue $firstName - Bonus Gratuit";
+        $mail->Subject = "Bienvenue $firstName - Bonus Sommeil Profond";
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
+
         $messageHTML =  'Bonjour '.$firstName.',<br/>
         <br/>
         Merci pour ton inscription.<br/>
+        <br/>
         À travers mon blog et ce bonus, j\'espère pouvoir t\'apporter les réponses que tu cherches.<br/>
         <br/>
-        Excuse-moi, mais je n\'ai pas encore eu le temps de terminer la rédaction du bonus.<br/>
-        Le site est très récent (28/03/2020).<br/>
-        Je vais le terminer pour le dimanche 05/04/20.<br/>
-        Tu recevras un mail avec le bonus.<br/>
+        Si tu rencontres toujours des problèmes après avoir mis en pratique les 4 conseils du bonus, c\'est sans doute que comme moi, tu as un sommeil fragile.<br/>
         <br/>
-        A+<br/>
+        Ne t\'en fais pas, après 20 ans sans avoir dormi correctement, j\'ai enfin retrouvé un super sommeil.<br/>
+        <br/>
+        C\'est à la porté de tous !<br/>
+        <br/>
+        Pour t\'aider davantage, regarde les services que je propose.<br/>
+        <br/>
+        Tu peux aussi naviguer dans mes différents articles, tu trouveras peut-être une réponse.<br/>
+        <br/>
+        À bientôt,<br/>
         Romain<br/>
         <br/>
         <br/>
@@ -74,13 +81,24 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
 
         //Replace the plain text body with one created manually
         $messageText = "Bonjour ".$firstName.",
+
         Merci pour ton inscription.
+
         À travers mon blog et ce bonus, j'espère pouvoir t'apporter les réponses que tu cherches.
 
-        Excuse-moi, mais je n'ai pas encore eu le temps de terminer la rédaction du bonus.
-        Le site est très récent (28/03/2020).
-        Je vais le terminer pour le dimanche 05/04/20.
-        Tu recevras un mail avec le bonus.
+        Si tu rencontres toujours des problèmes après avoir mis en pratique les 4 conseils du bonus, c'est sans doute que comme moi, tu as un sommeil fragile.
+
+        Ne t'en fais pas, après 20 ans sans avoir dormi correctement, j'ai enfin retrouvé un super sommeil.
+
+        C'est à la porté de tous !
+
+        Pour t'aider davantage, regarde les services que je propose.
+
+        Tu peux aussi naviguer dans mes différents articles, tu trouveras peut-être une réponse.
+
+        À bientôt,
+
+        Romain
 
         Lien de désabonnement:".$siteWebLink."/desabonnement/".$unsubcribeKey;
 
