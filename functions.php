@@ -83,3 +83,31 @@ function handleGetOrtherArticles() {
     }
     getOrtherArticles(htmlspecialchars($_REQUEST['articleName']));
 }
+
+function handleMailToAll() {
+    // Takes raw data from the request
+    $json = file_get_contents('php://input');
+    // Converts it into a PHP object
+    $data = json_decode($json);
+
+    if (!property_exists($data, 'object') ||
+        !property_exists($data, 'body') ||
+        !property_exists($data, 'password')) {
+        echo 'fail retrieving parameters';
+        return null;
+    }
+
+    // Until user session creation get a password
+    if ($data->password != "35370") {
+        echo 'wrong password';
+        return;
+    }
+
+    // Format body
+    $bodyFormated = str_replace('\n', '<br/>', $data->body);
+    $bodyFormated = preg_replace('/(^"|"$)*/', '', $bodyFormated);
+    $bodyFormated = str_replace('\"', '"', $bodyFormated);
+
+    $contacts = getAllMailContacts();
+    sendTextMailToAll($data->object,$bodyFormated, $contacts);
+}

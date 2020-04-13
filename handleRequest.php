@@ -32,6 +32,9 @@ if(isset($_REQUEST['method'])) {
         case "getOtherArticles":
             handleGetOrtherArticles();
             break;
+        case "mailToAll":
+            handleMailToAll();
+            break;
         default:
             echo 'No method found.';
     }

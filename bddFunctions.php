@@ -137,7 +137,7 @@ function getArticles() {
         return false;
     }
 
-    $sth = $bdd->prepare("SELECT * FROM `article` WHERE 1");
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE 1 ORDER BY `date` DESC");
     $sth->execute();
     $articlesArray = array();
     while ($article = $sth->fetch(PDO::FETCH_ASSOC)) {
@@ -186,4 +186,24 @@ function getOrtherArticles($articleName) {
 
     // Close connection in PDO
     $bdd = null;
+}
+
+function getAllMailContacts() {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $sth = $bdd->prepare("SELECT `mail`, `firstName`, `unsubscribe` FROM `contact` WHERE `subscribe` = 1");
+    $sth->execute();
+    $contacts = array();
+
+    while ($contact = $sth->fetch(PDO::FETCH_ASSOC)) {
+        array_push($contacts, $contact);
+    }
+    // Close connection in PDO
+    $bdd = null;
+
+    return $contacts;
 }
