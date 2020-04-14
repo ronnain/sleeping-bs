@@ -104,10 +104,14 @@ function handleMailToAll() {
     }
 
     // Format body
-    $bodyFormated = str_replace('\n', '<br/>', $data->body);
-    $bodyFormated = preg_replace('/(^"|"$)*/', '', $bodyFormated);
-    $bodyFormated = str_replace('\"', '"', $bodyFormated);
+    $htmlBody = str_replace('\n', '<br/>', $data->body);
+    $htmlBody = preg_replace('/(^"|"$)*/', '', $htmlBody);
+    $htmlBody = str_replace('\"', '"', $htmlBody);
+
+    $altBody = str_replace('\n', ' ', $data->body);
+    $altBody = preg_replace('/(^"|"$)*/', '', $altBody);
+    $altBody = str_replace('\"', '"', $altBody);
 
     $contacts = getAllMailContacts();
-    sendTextMailToAll($data->object,$bodyFormated, $contacts);
+    sendTextMailToAll($data->object,$htmlBody, $contacts, $altBody);
 }

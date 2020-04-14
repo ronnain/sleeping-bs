@@ -55,7 +55,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         $mail->addAttachment('./bonus/Sommeil_Profond_Bonus.pdf');
 
         //Set the subject line
-        $mail->Subject = "Bienvenue $firstName - Bonus Sommeil Profond";
+        $mail->Subject = "Bienvenue $firstName - Guide du Bon Dormeur";
         //Read an HTML message body from an external file, convert referenced images to embedded,
         //convert HTML into a basic plain-text alternative body
 
@@ -65,7 +65,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         <br/>
         À travers mon blog et ce bonus, j\'espère pouvoir t\'apporter les réponses que tu cherches.<br/>
         <br/>
-        Si tu rencontres toujours des problèmes après avoir mis en pratique les 4 conseils du bonus, c\'est sans doute que comme moi, tu as un sommeil fragile.<br/>
+        Si tu rencontres toujours des problèmes après avoir mis en pratique le Programme du Bon Dormeur, c\'est sans doute que comme moi, tu as un sommeil fragile.<br/>
         <br/>
         Ne t\'en fais pas, après 20 ans sans avoir dormi correctement, j\'ai enfin retrouvé un super sommeil.<br/>
         <br/>
@@ -90,7 +90,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
 
         À travers mon blog et ce bonus, j'espère pouvoir t'apporter les réponses que tu cherches.
 
-        Si tu rencontres toujours des problèmes après avoir mis en pratique les 4 conseils du bonus, c'est sans doute que comme moi, tu as un sommeil fragile.
+        Si tu rencontres toujours des problèmes après avoir mis en pratique le Programme du Bon Dormeur, c'est sans doute que comme moi, tu as un sommeil fragile.
 
         Ne t'en fais pas, après 20 ans sans avoir dormi correctement, j'ai enfin retrouvé un super sommeil.
 
@@ -116,7 +116,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
     }
 }
 
-function sendTextMailToAll($subject, $body, $contacts) {
+function sendTextMailToAll($subject, $body, $contacts, $altBody) {
     global $siteWebLink;
 
     $mail = new PHPMailer(true);
@@ -138,6 +138,7 @@ function sendTextMailToAll($subject, $body, $contacts) {
             $mail->addAddress($contact["mail"], $contact["firstName"]);
             $unsubcribeLink = '<br/><br/><a href= "'.$siteWebLink.'/desabonnement/'.$contact["unsubscribe"].'">se désabonner</a>';
             $mail->Body = $body . $unsubcribeLink;
+            $mail->AltBody = $altBody;
         } catch (Exception $e) {
             echo 'Invalid address skipped: ' . htmlspecialchars($contact["mail"]) . '<br>';
             continue;
