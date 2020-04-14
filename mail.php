@@ -52,7 +52,8 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         //Set who the message is to be sent to
         $mail->addAddress($mailAdresse, $firstName);
 
-        $mail->addAttachment('./bonus/Sommeil_Profond_Bonus.pdf');
+        $mail->addAttachment('./bonus/4_Points_Fondamentaux_Bon_Dormeur.pdf');
+        $mail->addAttachment('./bonus/Programme_Bon_Dormeur.pdf');
 
         //Set the subject line
         $mail->Subject = "Bienvenue $firstName - Guide du Bon Dormeur";
@@ -63,7 +64,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         <br/>
         Merci pour ton inscription.<br/>
         <br/>
-        À travers mon blog et ce bonus, j\'espère pouvoir t\'apporter les réponses que tu cherches.<br/>
+        À travers mon blog et ce guide du Bon Dormeur, j\'espère pouvoir t\'apporter les réponses que tu cherches.<br/>
         <br/>
         Si tu rencontres toujours des problèmes après avoir mis en pratique le Programme du Bon Dormeur, c\'est sans doute que comme moi, tu as un sommeil fragile.<br/>
         <br/>
@@ -88,7 +89,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
 
         Merci pour ton inscription.
 
-        À travers mon blog et ce bonus, j'espère pouvoir t'apporter les réponses que tu cherches.
+        À travers mon blog et ce guide du Bon Dormeur, j'espère pouvoir t'apporter les réponses que tu cherches.
 
         Si tu rencontres toujours des problèmes après avoir mis en pratique le Programme du Bon Dormeur, c'est sans doute que comme moi, tu as un sommeil fragile.
 
