@@ -137,7 +137,7 @@ function getArticles() {
         return false;
     }
 
-    $sth = $bdd->prepare("SELECT * FROM `article` WHERE 1 ORDER BY `date` DESC");
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE 1 ORDER BY `datePublished` DESC");
     $sth->execute();
     $articlesArray = array();
     while ($article = $sth->fetch(PDO::FETCH_ASSOC)) {
