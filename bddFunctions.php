@@ -214,11 +214,14 @@ function userLogin($pseudo, $password) {
         echo 'Echec de la connexion avec la base de données';
         return false;
     }
-    print_r($pseudo);
-    print_r($password);
-    echo '<br/>';
     // Check user account
+    $response = $bdd->query("SELECT * FROM `user` WHERE `pseudo` LIKE '$pseudo' AND `password` LIKE '$password'")
+                     or die( print_r($bdd->errorinfo()));
 
+    // if the user not exist, return
+    if (!$data = $response->fetch()){
+        return;
+    }
     // Token creation
     $token = bin2hex(random_bytes(32));
 
