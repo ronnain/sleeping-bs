@@ -115,3 +115,22 @@ function handleMailToAll() {
     $contacts = getAllMailContacts();
     sendTextMailToAll($data->object,$htmlBody, $contacts, $altBody);
 }
+
+function handleGetAllMails() {
+    if(!isset($_REQUEST['password']) || htmlspecialchars($_REQUEST['password']) !== "35370") {
+        return;
+    }
+    $contacts = getAllMailContacts();
+    print_r(json_encode($contacts));
+}
+
+function handleLogin(){
+    sleep(1);
+    if(!isset($_REQUEST['pseudo']) || !isset($_REQUEST['password'])) {
+        return;
+    }
+
+    $password = md5(PREFIX_SALT.htmlspecialchars($_REQUEST['password']).SUFFIX_SALT);
+    $token = userLogin (htmlspecialchars($_REQUEST['pseudo']),  $password);
+    echo $token;
+}

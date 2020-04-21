@@ -207,3 +207,31 @@ function getAllMailContacts() {
 
     return $contacts;
 }
+
+function userLogin($pseudo, $password) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+    print_r($pseudo);
+    print_r($password);
+    echo '<br/>';
+    // Check user account
+
+    // Token creation
+    $token = bin2hex(random_bytes(32));
+
+    // expiry Date 2h after the connexion
+    $req = $bdd->prepare('UPDATE `user` SET `token`= :token,`expiryDate`= (NOW() + INTERVAL 2 HOUR) WHERE `pseudo` = :pseudo AND `password` = :password');
+    $req->execute(array(
+        'pseudo' => $pseudo,
+        'password' => $password,
+        'token' => $token
+        ));
+
+    // Close connection in PDO
+    $bdd = null;
+
+    return $token;
+}
