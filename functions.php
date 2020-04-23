@@ -132,5 +132,5 @@ function handleLogin(){
 
     $password = md5(PREFIX_SALT.htmlspecialchars($_REQUEST['password']).SUFFIX_SALT);
     $token = userLogin (htmlspecialchars($_REQUEST['pseudo']),  $password);
-    echo $token;
+    echo json_encode($token);
 }

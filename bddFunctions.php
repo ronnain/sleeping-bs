@@ -220,7 +220,7 @@ function userLogin($pseudo, $password) {
 
     // if the user not exist, return
     if (!$data = $response->fetch()){
-        return;
+        return 'User not found';
     }
     // Token creation
     $token = bin2hex(random_bytes(32));
