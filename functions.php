@@ -92,14 +92,14 @@ function handleMailToAll() {
 
     if (!property_exists($data, 'object') ||
         !property_exists($data, 'body') ||
-        !property_exists($data, 'password')) {
+        !property_exists($data, 'pseudo') ||
+        !property_exists($data, 'token')) {
         echo 'fail retrieving parameters';
         return null;
     }
 
-    // Until user session creation get a password
-    if ($data->password != "35370") {
-        echo 'wrong password';
+    if(!checkUserToken(htmlspecialchars($data->pseudo), htmlspecialchars($data->token))) {
+        echo 'Token expiry';
         return;
     }
 
@@ -117,7 +117,11 @@ function handleMailToAll() {
 }
 
 function handleGetAllMails() {
-    if(!isset($_REQUEST['password']) || htmlspecialchars($_REQUEST['password']) !== "35370") {
+    if(!isset($_REQUEST['pseudo']) || !isset($_REQUEST['token'])) {
+        return;
+    }
+    if(!checkUserToken(htmlspecialchars($_REQUEST['pseudo']), htmlspecialchars($_REQUEST['token']))) {
+        print_r(json_encode("Token expiry"));
         return;
     }
     $contacts = getAllMailContacts();
@@ -129,8 +133,7 @@ function handleLogin(){
     if(!isset($_REQUEST['pseudo']) || !isset($_REQUEST['password'])) {
         return;
     }
-
     $password = md5(PREFIX_SALT.htmlspecialchars($_REQUEST['password']).SUFFIX_SALT);
-    $token = userLogin (htmlspecialchars($_REQUEST['pseudo']),  $password);
-    echo json_encode($token);
+    $token = userLogin(htmlspecialchars($_REQUEST['pseudo']),  $password);
+    print_r(json_encode($token));
 }

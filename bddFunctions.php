@@ -217,7 +217,6 @@ function userLogin($pseudo, $password) {
     // Check user account
     $response = $bdd->query("SELECT * FROM `user` WHERE `pseudo` LIKE '$pseudo' AND `password` LIKE '$password'")
                      or die( print_r($bdd->errorinfo()));
-
     // if the user not exist, return
     if (!$data = $response->fetch()){
         return 'User not found';
@@ -237,4 +236,21 @@ function userLogin($pseudo, $password) {
     $bdd = null;
 
     return $token;
+}
+
+function checkUserToken($pseudo, $token) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+    // Check user account
+    $response = $bdd->query("SELECT * FROM `user` WHERE `pseudo` LIKE '$pseudo' AND `token` LIKE '$token' AND `expiryDate` >= NOW()")
+                     or die( print_r($bdd->errorinfo()));
+
+    // if the user not exist, return
+    if (!$data = $response->fetch()){
+        return false;
+    }
+    return true;
 }
