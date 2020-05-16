@@ -7,16 +7,14 @@ function handleContactCreation() {
     $json = file_get_contents('php://input');
     // Converts it into a PHP object
     $data = json_decode($json);
-    $mailData = $data->mail;
-
-    if (!property_exists($mailData, 'firstName') ||
-        !property_exists($mailData, 'mail')) {
+    if (!property_exists($data, 'firstName') ||
+        !property_exists($data, 'mail')) {
         echo 'fail retrieving parameters';
         return null;
     }
 
-    $unsubcribeKey = createContact(htmlspecialchars($mailData->firstName), htmlspecialchars($mailData->mail));
-    sendBonus($mailData->firstName, $mailData->mail, $unsubcribeKey);
+    $unsubcribeKey = createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail));
+    sendBonus($data->firstName, $data->mail, $unsubcribeKey);
 }
 
 function handleUnsubscribe() {
