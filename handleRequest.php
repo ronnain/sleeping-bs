@@ -38,6 +38,9 @@ if(isset($_REQUEST['method'])) {
         case "getAllMails":
             handleGetAllMails();
             break;
+        case "addNewArticle":
+            addNewArticle();
+            break;
         case "login":
             handleLogin();
             break;

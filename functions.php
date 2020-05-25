@@ -135,3 +135,42 @@ function handleLogin(){
     $token = userLogin(htmlspecialchars($_REQUEST['pseudo']),  $password);
     print_r(json_encode($token));
 }
+
+function addNewArticle() {
+    // Takes raw data from the request
+    $json = file_get_contents('php://input');
+    // Converts it into a PHP object
+    $data = json_decode($json);
+
+    if (!property_exists($data, 'articleText') ||
+        !property_exists($data, 'article') ||
+        !property_exists($data, 'pseudo') ||
+        !property_exists($data, 'token')) {
+        echo 'fail retrieving parameters';
+        return null;
+    }
+
+    if(!checkUserToken(htmlspecialchars($data->pseudo), htmlspecialchars($data->token))) {
+        echo 'Token expiry';
+        return;
+    }
+
+    $article = $data->article;
+
+    if(!property_exists($article, 'title') ||
+        !property_exists($article, 'articleName') ||
+        !property_exists($article, 'img') ||
+        !property_exists($article, 'imgTitle') ||
+        !property_exists($article, 'description') ||
+        !property_exists($article, 'metaDesc')){
+        echo 'fail retrieving article parameters';
+    }
+
+    newArtcileFile($article->articleName, $data->articleText);
+    addNewArticleinfoToBDD($article);
+}
+
+function newArtcileFile($articleName, $text) {
+    $articlePath = "articles/" . $articleName . '.html';
+    file_put_contents($articlePath, $text, LOCK_EX);
+}

@@ -254,3 +254,26 @@ function checkUserToken($pseudo, $token) {
     }
     return true;
 }
+
+function addNewArticleinfoToBDD($article) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $req = $bdd->prepare('INSERT INTO `article` (`title`, `description`, `metaDesc`, `datePublished`, `dateModified`, `img`, `imgTitle`, `articleName`)
+     VALUES (:title, :descr, :metaDesc, NOW(), NOW(), :img, :imgTitle, :articleName)');
+    $req->execute(array(
+        'title' => $article->title,
+        'descr' => $article->description,
+        'metaDesc' => $article->metaDesc,
+        'img' => $article->img,
+        'imgTitle' => $article->imgTitle,
+        'articleName' => $article->articleName
+        ));
+
+    // Close connection in PDO
+    $bdd = null;
+    print_r('{ "success": true }');
+}
