@@ -168,9 +168,19 @@ function addNewArticle() {
 
     newArtcileFile($article->articleName, $data->articleText);
     addNewArticleinfoToBDD($article);
+    addArticleToSitemap($article->articleName);
 }
 
 function newArtcileFile($articleName, $text) {
     $articlePath = "articles/" . $articleName . '.html';
     file_put_contents($articlePath, $text, LOCK_EX);
+}
+
+function addArticleToSitemap($articleName) {
+    $xml = simplexml_load_file("../sitemap.xml") or die("Failed to load");
+    $newUrl = $xml->addChild('url');
+    $newUrl->addChild('loc', 'https://sommeilprofond.fr/articles/' . $articleName);
+    // save with the current date
+    $newUrl->addChild('lastmod', date("Y-m-d"));
+    file_put_contents('../sitemap.xml', $xml->asXML());
 }
