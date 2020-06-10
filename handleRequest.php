@@ -1,5 +1,6 @@
 <?php
 require 'functions.php';
+require 'drive.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST,GET,OPTIONS');
@@ -43,6 +44,15 @@ if(isset($_REQUEST['method'])) {
             break;
         case "login":
             handleLogin();
+            break;
+        case "getAllFilesFromDrive":
+            getAllFilesFromDrive();
+            break;
+        case "getArticleDriveData":
+            getArticleDriveData();
+            break;
+        case "updateArticle":
+            updateArticle();
             break;
         default:
             echo 'No method found.';

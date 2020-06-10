@@ -1,5 +1,6 @@
 <?php
-require 'bddConnexion.php';
+require_once 'bddConnexion.php';
+require_once 'modeles.php';
 
 function getContacts() {
     $bdd = connect();
@@ -54,17 +55,6 @@ function unsubscribeContact($unsubscribeKey) {
     // Close connection in PDO
     $bdd = null;
 }
-
-class Comment {
-    public $id;
-    public $firstName;
-    public $comment;
-    public $date;
-    public $articleId;
-    public $mainCommentId;
-    public $repliesComment;
-}
-
 
 function getComments($articleId) {
     $comments = array();
@@ -147,6 +137,24 @@ function getArticles() {
     echo json_encode($articlesArray, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     // Close connection in PDO
     $bdd = null;
+}
+
+function getArticlesData() {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE 1 ORDER BY `datePublished` DESC");
+    $sth->execute();
+    $articlesArray = array();
+    while ($article = $sth->fetch(PDO::FETCH_ASSOC)) {
+        array_push($articlesArray, $article);
+    }
+    // Close connection in PDO
+    $bdd = null;
+    return $articlesArray;
 }
 
 function getArticleByName($articleName) {
@@ -256,6 +264,11 @@ function checkUserToken($pseudo, $token) {
 }
 
 function addNewArticleinfoToBDD($article) {
+    insertArticle($article);
+    print_r('{ "success": true }');
+}
+
+function insertArticle($article) {
     $bdd = connect();
     if(!$bdd){
         echo 'Echec de la connexion avec la base de données';
@@ -263,11 +276,13 @@ function addNewArticleinfoToBDD($article) {
     }
 
     $req = $bdd->prepare('INSERT INTO `article` (`title`, `description`, `metaDesc`, `datePublished`, `dateModified`, `img`, `imgTitle`, `articleName`)
-     VALUES (:title, :descr, :metaDesc, NOW(), NOW(), :img, :imgTitle, :articleName)');
+     VALUES (:title, :descr, :metaDesc, :datePublished, :dateModified, :img, :imgTitle, :articleName)');
     $req->execute(array(
         'title' => $article->title,
         'descr' => $article->description,
         'metaDesc' => $article->metaDesc,
+        'datePublished' => property_exists($article, 'datePublished') ? $article->datePublished : date("Y-m-d G:i:s"),
+        'dateModified' => property_exists($article, 'dateModified') ? $article->dateModified : date("Y-m-d G:i:s"),
         'img' => $article->img,
         'imgTitle' => $article->imgTitle,
         'articleName' => $article->articleName
@@ -275,5 +290,137 @@ function addNewArticleinfoToBDD($article) {
 
     // Close connection in PDO
     $bdd = null;
-    print_r('{ "success": true }');
+}
+
+function updateArticleDB($article) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+    $req = $bdd->prepare('UPDATE `article` SET `title` = :title, `description` = :descr, `metaDesc` = :metaDesc, `datePublished` = :datePublished, `dateModified` = :dateModified, `img` = :img, `imgTitle` = :imgTitle, `articleName` = :articleName WHERE `article`.`id` = :id;');
+    $req->execute(array(
+        'title' => $article->title,
+        'descr' => $article->description,
+        'metaDesc' => $article->metaDesc,
+        'datePublished' => property_exists($article, 'datePublished') ? $article->datePublished : date("Y-m-d G:i:s"),
+        'dateModified' => date("Y-m-d G:i:s"),
+        'img' => $article->img,
+        'imgTitle' => $article->imgTitle,
+        'articleName' => $article->articleName,
+        'id' => $article->id
+        ));
+    // Close connection in PDO
+    $bdd = null;
+}
+
+function getArticleConfigDataByName($articleName) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    // Get article
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` LIKE '$articleName'");
+    $sth->execute();
+    $article = $sth->fetch(PDO::FETCH_ASSOC);
+
+    $articleConfig = '';
+    // Get article config
+    if($article){
+        $articleId = $article['id'];
+        $sth = $bdd->prepare("SELECT * FROM `articleconfig` WHERE `idArticle` = $articleId");
+        $sth->execute();
+        $articleConfig = $sth->fetch(PDO::FETCH_ASSOC);
+        if(!$articleConfig) {
+            $articleConfig = '';
+        }else {
+            $articleConfig['img'] = json_decode($articleConfig['img']);
+        }
+    }
+    // Close connection in PDO
+    $bdd = null;
+
+    $result = new stdClass();
+    $result->article = $article;
+    $result->articleConfig = $articleConfig;
+
+    return $result;
+}
+
+function updateArticleTable($article){
+    if(!checkArticleExists($article->articleName)){
+        insertArticle($article);
+    } else { // update Article
+        updateArticleDB($article);
+    }
+}
+
+function checkArticleExists($articleName){
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+    $response = $bdd->query("SELECT `id` FROM `article` WHERE `articleName` LIKE '$articleName'")
+    or die( print_r($bdd->errorinfo()));
+    // if the user not exist, return
+    $data = $response->fetch();
+    $bdd = null;
+    return $data ? $data['id'] : false;
+}
+
+function checkArticleConfigExists($articleId){
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+    $response = $bdd->query("SELECT `id` FROM `articleconfig` WHERE `idArticle` = $articleId")
+    or die( print_r($bdd->errorinfo()));
+    // if the user not exist, return
+    $data = $response->fetch();
+    $bdd = null;
+    return $data ? $data['id'] : false;
+}
+
+function updateArticleConfigTable($articleConfig, $articleId) {
+    if(!checkArticleConfigExists($articleId)){
+        insertArticleConfig($articleConfig, $articleId);
+    } else { // update Article
+        updateArticleConfigDB($articleConfig);
+    }
+}
+
+function insertArticleConfig($articleConfig, $articleId) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $req = $bdd->prepare('INSERT INTO `articleconfig` (`idArticle`, `img`) VALUES (:idArticle, :img);');
+    $req->execute(array(
+        'idArticle' => $articleId,
+        'img' => json_encode($articleConfig->img)
+        ));
+
+    // Close connection in PDO
+    $bdd = null;
+}
+
+function updateArticleConfigDB($articleConfig) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+    $req = $bdd->prepare('UPDATE `articleconfig` SET `img` = :img WHERE `articleconfig`.`idArticle` = :idArticle');
+    $req->execute(array(
+        'img' => json_encode($articleConfig->img),
+        'idArticle' => $articleConfig->idArticle
+        ));
+    // Close connection in PDO
+    $bdd = null;
 }
