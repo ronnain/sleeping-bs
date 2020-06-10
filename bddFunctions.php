@@ -181,7 +181,7 @@ function getOrtherArticles($articleName) {
         return false;
     }
 
-    $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` NOT LIKE '$articleName'");
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` NOT LIKE '$articleName' LIMIT 2");
     $sth->execute();
     $articlesArray = array();
 
