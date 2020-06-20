@@ -179,6 +179,7 @@ function newArticleFile($articleName, $content) {
 function addArticleToSitemap($articleName) {
     $url = 'https://sommeilprofond.fr/articles/' . $articleName;
     $xml = simplexml_load_file("../sitemap.xml") or die("Failed to load");
+    $urlArticles = "https://sommeilprofond.fr/articles";
     $update = false;
     //print_r($xml);
     foreach ($xml->children() as $child)
@@ -188,6 +189,10 @@ function addArticleToSitemap($articleName) {
             $child->lastmod[0] = date("Y-m-d");
             $update = true;
             break;
+        }
+        // Update articles date
+        if($urlSitemap === $urlArticles) {
+            $child->lastmod[0] = date("Y-m-d");
         }
     }
     if(!$update){
@@ -238,10 +243,10 @@ function updateArticle() {
     $articleContent = getFileDriveContentByName($article->articleName);
     $articleContent = formatDriveDocContent($articleContent);
     $articleContent = imgToPicture($articleContent, $articleConfig->img);
+    $articleContent = handleExternalLink($articleContent);
     newArticleFile($article->articleName, $articleContent);
-
-    addArticleToSitemap($article->articleName);
     // Add/update sitemap
+    addArticleToSitemap($article->articleName);
     echo '{ "success": true }';
 }
 

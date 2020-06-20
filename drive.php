@@ -119,9 +119,26 @@ function imgToPicture($articleContent, $images) {
         $picture .= '<img src="'.$backendLink.'sleeping-bs/img/'.$img->imgPath.'/article/'.$key.'.jpg" alt="'.$img->articleTitle.'" title="'.$img->articleTitle.'" class="noMarginBottom fullWidth">';
         $picture .= "</picture>";
         if(property_exists($img, 'linkImgCreator')){
-            $picture .= '<div class="creditImgDiv"><a class="creditImg" href="'.$img->linkImgCreator.'" target="_blank" rel="nofollow">Lien Créateur Image</a></div>';
+            $picture .= '<div class="creditImgDiv"><a class="creditImg" href="'.$img->linkImgCreator.'" target="_blank" rel="nofollow noreferrer">Lien Créateur Image</a></div>';
         }
         $articleContent = preg_replace('/<img\/>/', $picture, $articleContent, 1);
     }
     return $articleContent;
+}
+
+function handleExternalLink($articleContent) {
+    // The link added previously for img creditor start <a class=... and the link in the text start with <a href=...
+    $findLink = "<a href=\"";
+    $pieces = explode($findLink, $articleContent);
+    $pieces_length = count($pieces);
+
+    for ($i = 1; $i < $pieces_length; $i++) {
+        // add target="_blank" rel="nofollow noreferrer" to external link
+        if('https://sommeilprofond.fr' !== substr($pieces[$i], 0, 25)) {
+            $pieces[$i] = '<a target="_blank" rel="nofollow noreferrer" href="' . $pieces[$i];
+        } else {
+            $pieces[$i] = '<a href="' . $pieces[$i];
+        }
+    }
+    return implode($pieces);
 }
