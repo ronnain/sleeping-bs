@@ -1,2 +1,4 @@
 # Ignore files called 'config.php'
 config.php
+
+img/
