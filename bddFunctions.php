@@ -385,11 +385,13 @@ function checkArticleConfigExists($articleId){
     return $data ? $data['id'] : false;
 }
 
-function updateArticleConfigTable($articleConfig, $articleId) {
+function updateArticleConfigTable($imgPropertiesList, $articleId) {
+    $articleConfig = new stdClass();
+    $articleConfig->img = $imgPropertiesList;
     if(!checkArticleConfigExists($articleId)){
         insertArticleConfig($articleConfig, $articleId);
     } else { // update Article
-        updateArticleConfigDB($articleConfig);
+        updateArticleConfigDB($articleConfig, $articleId);
     }
 }
 
@@ -410,7 +412,7 @@ function insertArticleConfig($articleConfig, $articleId) {
     $bdd = null;
 }
 
-function updateArticleConfigDB($articleConfig) {
+function updateArticleConfigDB($articleConfig, $articleId) {
     $bdd = connect();
     if(!$bdd){
         echo 'Echec de la connexion avec la base de données';
@@ -419,7 +421,7 @@ function updateArticleConfigDB($articleConfig) {
     $req = $bdd->prepare('UPDATE `articleconfig` SET `img` = :img WHERE `articleconfig`.`idArticle` = :idArticle');
     $req->execute(array(
         'img' => json_encode($articleConfig->img),
-        'idArticle' => $articleConfig->idArticle
+        'idArticle' => $articleId
         ));
     // Close connection in PDO
     $bdd = null;

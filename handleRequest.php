@@ -54,6 +54,9 @@ if(isset($_REQUEST['method'])) {
         case "updateArticle":
             updateArticle();
             break;
+        case "retryImgUpload":
+            retryImgUpload();
+            break;
         default:
             echo 'No method found.';
     }

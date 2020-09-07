@@ -1,6 +1,7 @@
 <?php
 require 'bddFunctions.php';
 require 'mail.php';
+require 'img.php';
 
 function handleContactCreation() {
     // Takes raw data from the request
@@ -212,7 +213,6 @@ function updateArticle() {
     $data = json_decode($json);
 
     if (!property_exists($data, 'article') ||
-        !property_exists($data, 'articleConfig') ||
         !property_exists($data, 'articleCreation') ||
         !property_exists($data, 'pseudo') ||
         !property_exists($data, 'token')) {
@@ -224,32 +224,92 @@ function updateArticle() {
         echo 'Token expiry';
         return;
     }
+
+    // Retrieve the data send in the request
     $article = $data->article;
-    $articleConfig = $data->articleConfig;
-    if(!property_exists($article, 'title') ||
-        !property_exists($article, 'articleName') ||
-        !property_exists($article, 'img') ||
-        !property_exists($article, 'imgTitle') ||
-        !property_exists($article, 'description') ||
-        !property_exists($article, 'metaDesc') ||
-        !property_exists($articleConfig, 'img')
-        ){
+    if (!property_exists($article, 'articleName')){
         echo 'fail retrieving article parameters';
         return;
     }
-    updateArticleTable($article);
-    $articleId = getArticleId($article);
-    updateArticleConfigTable($articleConfig, $articleId);
+
+    $response = new stdClass();
+
     $articleContent = getFileDriveContentByName($article->articleName);
+    $imgPropertiesList = getImgPropertiesList($articleContent);
     $articleContent = formatDriveDocContent($articleContent);
-    $articleContent = imgToPicture($articleContent, $articleConfig->img);
+    $articleContent = getImgLinkCreditor($imgPropertiesList, $articleContent);
+    $articleContent = imgToPicture($articleContent, $imgPropertiesList, $article->articleName);
     $articleContent = handleExternalLink($articleContent);
+
+    prepareArticleProperties($article, $articleContent, $imgPropertiesList, $data);
+    if (!$article->metaDesc || !$article->title) {
+        echo 'fail to retrieve meta-description or title';
+        return;
+    }
+
+    // Finalisation
     newArticleFile($article->articleName, $articleContent);
+    $response->fileCreation = true;
     // Add/update sitemap
     addArticleToSitemap($article->articleName);
-    echo '{ "success": true }';
+
+    // Create IMG from article
+    createArticleImg($imgPropertiesList, $article->articleName, $response);
+    $response->imgList = $imgPropertiesList;
+
+    // Update the bdd
+    updateArticleTable($article);
+    $articleId = getArticleId($article);
+    updateArticleConfigTable($imgPropertiesList, $articleId);
+
+    echo json_encode($response);
 }
 
 function getArticleId($article) {
     return checkArticleExists($article->articleName);
+}
+
+function prepareArticleProperties($article, $articleContent, $imgPropertiesList, $data) {
+    // Get title, if the title is not send in the request retrieve the H1 title in the content
+    if (!property_exists($data, 'title')) {
+        $article->title = html_entity_decode(getTitleFromArticleContent($articleContent));
+    }
+
+    // Get the meta description, if the meta is not send in the request, it is retrieved in the content ( ## Meta : ...##)
+    if (!property_exists($data, 'metaDesc')) {
+        $article->metaDesc = html_entity_decode(getMetaDescriptionFromArticleContent($articleContent));
+        $articleContent = removeMetaDescription($articleContent);
+    }
+    $article->description = $article->metaDesc;
+
+    // Get the img display in articles page
+    if (!empty($imgPropertiesList)) {
+        $article->img = "$article->articleName/img1";
+        $article->imgTitle = $imgPropertiesList[0]->title;
+    }
+}
+
+function retryImgUpload() {
+    if(!isset($_REQUEST['pseudo']) || !isset($_REQUEST['token'])) {
+        return;
+    }
+    if(!checkUserToken(htmlspecialchars($_REQUEST['pseudo']), htmlspecialchars($_REQUEST['token']))) {
+        print_r(json_encode("Token expiry"));
+        return;
+    }
+    if (!isset($_REQUEST['articleName'])) {
+        echo 'fail retrieving parameters';
+        return;
+    }
+
+    $response = new stdClass();
+
+    $articleName = $_REQUEST['articleName'];
+    $articleDataConfig = getArticleConfigDataByName($articleName);
+    $listImg = $articleDataConfig->articleConfig['img'];
+    createArticleImg($listImg, $articleName, $response);
+    updateArticleConfigTable($listImg, $articleDataConfig->article['id']);
+
+    $response->imgList = $listImg;
+    echo json_encode($response);
 }
