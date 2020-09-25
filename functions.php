@@ -241,7 +241,7 @@ function updateArticle() {
     $articleContent = imgToPicture($articleContent, $imgPropertiesList, $article->articleName);
     $articleContent = handleExternalLink($articleContent);
 
-    prepareArticleProperties($article, $articleContent, $imgPropertiesList, $data);
+    $articleContent = prepareArticleProperties($article, $articleContent, $imgPropertiesList, $data);
     if (!$article->metaDesc || !$article->title) {
         echo 'fail to retrieve meta-description or title';
         return;
@@ -253,14 +253,19 @@ function updateArticle() {
     // Add/update sitemap
     addArticleToSitemap($article->articleName);
 
-    // Create IMG from article
-    createArticleImg($imgPropertiesList, $article->articleName, $response);
-    $response->imgList = $imgPropertiesList;
+    // Create IMG from article, if no params updateTextOnly
+    if (!property_exists($data, 'updateTextOnly')) {
+        createArticleImg($imgPropertiesList, $article->articleName, $response);
+        $response->imgList = $imgPropertiesList;
+    }
 
     // Update the bdd
     updateArticleTable($article);
-    $articleId = getArticleId($article);
-    updateArticleConfigTable($imgPropertiesList, $articleId);
+    // Don't update articleconfig, if only the text has changed
+    if (!property_exists($data, 'updateTextOnly')) {
+        $articleId = getArticleId($article);
+        updateArticleConfigTable($imgPropertiesList, $articleId);
+    }
 
     echo json_encode($response);
 }
@@ -287,6 +292,7 @@ function prepareArticleProperties($article, $articleContent, $imgPropertiesList,
         $article->img = "$article->articleName/img1";
         $article->imgTitle = $imgPropertiesList[0]->title;
     }
+    return $articleContent;
 }
 
 function retryImgUpload() {

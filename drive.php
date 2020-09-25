@@ -241,6 +241,6 @@ function getMetaDescriptionFromArticleContent($articleContent) {
 }
 
 function removeMetaDescription($articleContent) {
-    return preg_replace('/<p><a\s*(href="[a-zA-Z0-9_= .:\-\/]*"|\s*)*>(&nbsp;|\s)*(creator|creditor|createur|credit|Lien createur|lien|link|Lien)(&nbsp;|\s)*<\/a><\/p>/',
+    return preg_replace('/<p>(&nbsp;|\s)*##(&nbsp;|\s)*(meta|Meta)(&nbsp;|\s)*:[a-zA-Z0-9_= .:\-\/!?;()\-#&°,]*(&nbsp;|\s)*##(&nbsp;|\s)*<\/p>/',
     '', $articleContent);
 }
