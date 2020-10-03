@@ -220,7 +220,7 @@ function getImgLinkCreditor($imgPropertiesList, $articleContent) {
 }
 
 function getTitleFromArticleContent($articleContent) {
-    preg_match('/<h1>[a-zA-Z0-9_= .:\-\/!?;()\-#&°,]*<\/h1>/', $articleContent, $matchTitle, PREG_OFFSET_CAPTURE);
+    preg_match('/<h1>[a-zA-Z0-9_= .:\-\/!?;()\-#&°,+-]*<\/h1>/', $articleContent, $matchTitle, PREG_OFFSET_CAPTURE);
     if (!empty($matchTitle)) {
         $title = $matchTitle[0][0];
         $title = substr($title, 4, strlen($title) - 9); // remove <h1></h1>
@@ -230,7 +230,7 @@ function getTitleFromArticleContent($articleContent) {
 }
 
 function getMetaDescriptionFromArticleContent($articleContent) {
-    preg_match('/<p>(&nbsp;|\s)*##(&nbsp;|\s)*(meta|Meta)(&nbsp;|\s)*:[a-zA-Z0-9_= .:\-\/!?;()\-#&°,]*(&nbsp;|\s)*##(&nbsp;|\s)*<\/p>/', $articleContent, $matchMeta, PREG_OFFSET_CAPTURE);
+    preg_match('/<p>(&nbsp;|\s)*##(&nbsp;|\s)*(meta|Meta)(&nbsp;|\s)*:[a-zA-Z0-9_= .:\-\/!?;()\-#&°,+-]*(&nbsp;|\s)*##(&nbsp;|\s)*<\/p>/', $articleContent, $matchMeta, PREG_OFFSET_CAPTURE);
     if (!empty($matchMeta)) {
         $meta = $matchMeta[0][0];
         $meta = explode(':', $meta)[1];
@@ -241,6 +241,6 @@ function getMetaDescriptionFromArticleContent($articleContent) {
 }
 
 function removeMetaDescription($articleContent) {
-    return preg_replace('/<p>(&nbsp;|\s)*##(&nbsp;|\s)*(meta|Meta)(&nbsp;|\s)*:[a-zA-Z0-9_= .:\-\/!?;()\-#&°,]*(&nbsp;|\s)*##(&nbsp;|\s)*<\/p>/',
+    return preg_replace('/<p>(&nbsp;|\s)*##(&nbsp;|\s)*(meta|Meta)(&nbsp;|\s)*:[a-zA-Z0-9_= .:\-\/!?;()\-#&°,+-]*(&nbsp;|\s)*##(&nbsp;|\s)*<\/p>/',
     '', $articleContent);
 }
