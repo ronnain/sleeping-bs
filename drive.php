@@ -140,7 +140,8 @@ function handleExternalLink($articleContent) {
     for ($i = 1; $i < $pieces_length; $i++) {
         // add target="_blank" rel="nofollow noreferrer" to external link
         if('https://sommeilprofond.fr' !== substr($pieces[$i], 0, 25)) {
-            $pieces[$i] = '<a target="_blank" rel="nofollow noreferrer" href="' . $pieces[$i];
+            //$pieces[$i] = '<a target="_blank" rel="nofollow noreferrer" href="' . $pieces[$i];
+            $pieces[$i] = '<a target="_blank" href="' . $pieces[$i];
         } else {
             $pieces[$i] = '<a href="' . $pieces[$i];
         }
