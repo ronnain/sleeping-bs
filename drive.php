@@ -185,7 +185,7 @@ function getImgLinkCreditor($imgPropertiesList, $articleContent) {
 
     // Get all the balise with link of img creditor
     preg_match_all(
-        '/<p><a\s*(href="[a-zA-Z0-9_= .:\-\/]*"|\s*)*>(&nbsp;|\s)*(creator|creditor|createur|credit|Lien createur|lien|link|Lien)(&nbsp;|\s)*<\/a><\/p>/',
+        '/<p><a\s*(href="[a-zA-Z0-9_= .:\-\/%]*"|\s*)*>(&nbsp;|\s)*(creator|creditor|createur|credit|Lien createur|lien|link|Lien)(&nbsp;|\s)*<\/a><\/p>/',
         $articleContent, $matches,
         PREG_OFFSET_CAPTURE);
 
@@ -195,7 +195,7 @@ function getImgLinkCreditor($imgPropertiesList, $articleContent) {
         $startPosBaliseImg = strpos($articleContent, '<img/>', $startPosBaliseImg + 1); // +1 to not found the same balise
         $posNextBasliseImg = false;
 
-        if ($i < sizeof($imgPropertiesList)) {
+        if ($i < sizeof($imgPropertiesList) -1) {
             $posNextBasliseImg = strpos($articleContent, '<img/>', $startPosBaliseImg + 1);
         }
 
@@ -203,10 +203,10 @@ function getImgLinkCreditor($imgPropertiesList, $articleContent) {
         foreach ($matches[0] as $matchItem) {
 
             // The finding match is after an img and before the next img
-            if ($matchItem[1] > $startPosBaliseImg && $posNextBasliseImg && $matchItem[1] < $posNextBasliseImg) {
+            if ($matchItem[1] > $startPosBaliseImg && (!$posNextBasliseImg || ($posNextBasliseImg && $matchItem[1] < $posNextBasliseImg))) {
 
                 // Get only the link
-                preg_match('/href="[a-zA-Z0-9_= .:\-\/]*"/', $matchItem[0], $matchLink, PREG_OFFSET_CAPTURE);
+                preg_match('/href="[a-zA-Z0-9_= .:\-\/%]*"/', $matchItem[0], $matchLink, PREG_OFFSET_CAPTURE);
                 $linkCreditor = $matchLink[0][0];
                 $linkCreditor = substr($linkCreditor, 6, strlen($linkCreditor) - 7); // remove href and "
 
@@ -216,7 +216,7 @@ function getImgLinkCreditor($imgPropertiesList, $articleContent) {
         }
     }
 
-    return preg_replace('/<p><a\s*(href="[a-zA-Z0-9_= .:\-\/]*"|\s*)*>(&nbsp;|\s)*(creator|creditor|createur|credit|Lien createur|lien|link|Lien)(&nbsp;|\s)*<\/a><\/p>/',
+    return preg_replace('/<p><a\s*(href="[a-zA-Z0-9_= .:\-\/%]*"|\s*)*>(&nbsp;|\s)*(creator|creditor|createur|credit|Lien createur|lien|link|Lien)(&nbsp;|\s)*<\/a><\/p>/',
      '', $articleContent);
 }
 
