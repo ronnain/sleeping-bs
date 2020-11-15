@@ -277,12 +277,12 @@ function getArticleId($article) {
 function prepareArticleProperties($article, $articleContent, $imgPropertiesList, $data) {
     // Get title, if the title is not send in the request retrieve the H1 title in the content
     if (!property_exists($data, 'title')) {
-        $article->title = html_entity_decode(getTitleFromArticleContent($articleContent));
+        $article->title = html_entity_decode(getTitleFromArticleContent($articleContent), ENT_QUOTES);
     }
 
     // Get the meta description, if the meta is not send in the request, it is retrieved in the content ( ## Meta : ...##)
     if (!property_exists($data, 'metaDesc')) {
-        $article->metaDesc = html_entity_decode(getMetaDescriptionFromArticleContent($articleContent));
+        $article->metaDesc = html_entity_decode(getMetaDescriptionFromArticleContent($articleContent), ENT_QUOTES);
         $articleContent = removeMetaDescription($articleContent);
     }
     $article->description = $article->metaDesc;
