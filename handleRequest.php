@@ -12,9 +12,6 @@ if(isset($_REQUEST['method'])) {
         case "createContact":
             handleContactCreation();
             break;
-        case "getContacts":
-            handleGetContacts();
-            break;
         case "unsubscribe":
             handleUnsubscribe();
             break;

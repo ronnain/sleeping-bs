@@ -2,6 +2,7 @@
 require 'bddFunctions.php';
 require 'mail.php';
 require 'img.php';
+require 'contact.php';
 
 function handleContactCreation() {
     // Takes raw data from the request
@@ -31,10 +32,6 @@ function handleUnsubscribe() {
     $unsubscribeKey = htmlspecialchars($data->key);
     unsubscribeContact($unsubscribeKey);
     echo '{ "success": true }';
-}
-
-function handleGetContacts() {
-    getContacts();
 }
 
 function handleGetComments() {

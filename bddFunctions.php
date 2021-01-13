@@ -2,60 +2,6 @@
 require_once 'bddConnexion.php';
 require_once 'modeles.php';
 
-function getContacts() {
-    $bdd = connect();
-    $response = $bdd->query('SELECT * FROM `contact`') or die( print_r($bdd->errorinfo()));
-
-    echo '{';
-
-    while ($donnees = $response->fetch()){
-        echo '"'.$donnees['firstName'].'": "'. $donnees['mail'].'       Date:'.$donnees['creationDate'].'",';
-    }
-
-    echo '"done" : "ok"}';
-
-    $response->closeCursor();
-    // Close connection in PDO
-    $bdd = null;
-}
-
-function createContact($firstName, $mail) {
-    $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
-
-    $unsubscribeKey = bin2hex(random_bytes(32));
-
-    $req = $bdd->prepare('INSERT INTO contact(firstName, mail, creationDate, unsubscribe) VALUES(:firstName, :mail, NOW(), :unsubscribe)');
-    $req->execute(array(
-        'firstName' => $firstName,
-        'mail' => $mail,
-        'unsubscribe' => $unsubscribeKey
-        ));
-
-    // Close connection in PDO
-    $bdd = null;
-
-    return $unsubscribeKey;
-}
-
-function unsubscribeContact($unsubscribeKey) {
-    $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
-
-    $req = $bdd->prepare('UPDATE `contact` SET `subscribe`= false,`unsubscribeDate`= NOW() WHERE `unsubscribe` = :unsubscribe');
-    $req->execute(array(
-        'unsubscribe' => $unsubscribeKey
-        ));
-    // Close connection in PDO
-    $bdd = null;
-}
-
 function getComments($articleId) {
     $comments = array();
     $bdd = connect();
@@ -194,26 +140,6 @@ function getOrtherArticles($articleName) {
 
     // Close connection in PDO
     $bdd = null;
-}
-
-function getAllMailContacts() {
-    $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
-
-    $sth = $bdd->prepare("SELECT `mail`, `firstName`, `unsubscribe` FROM `contact` WHERE `subscribe` = 1");
-    $sth->execute();
-    $contacts = array();
-
-    while ($contact = $sth->fetch(PDO::FETCH_ASSOC)) {
-        array_push($contacts, $contact);
-    }
-    // Close connection in PDO
-    $bdd = null;
-
-    return $contacts;
 }
 
 function userLogin($pseudo, $password) {
