@@ -168,13 +168,44 @@ function sendSubNotification($firstName, $email) {
     //Set the subject line
 
     $mail->Subject = "New sub : $firstName";
-    $mail->Body = "You receive a new sub from". $firstName.": ".$email.".<br/><br>
+    $mail->Body = "You receive a new sub from ". $firstName.": ".$email.".<br/><br>
     From the page :". $_SERVER['HTTP_REFERER'].".<br/><br/>
     Putain continue comme ça! Tu gères ! :D";
 
     $mail->AltBody = "You receive a new sub from $firstName ($email).\n
     From the page :". $_SERVER['HTTP_REFERER'].".\n
     Putain continue comme ça! Tu gères ! :D";
+
+    $mail->addAddress('romain.geffrault+sub@gmail.com', 'Romain');
+
+    try {
+        $mail->send();
+    } catch (Exception $e) {
+        //Reset the connection to abort sending this message
+        //The loop will continue trying to send to the rest of the list
+        $mail->getSMTPInstance()->reset();
+    }
+    $mail->clearAddresses();
+}
+
+function sendCommentNotification($firstName) {
+    $mail = new PHPMailer(true);
+    setHeaderMail($mail);
+    global $mailAdressServer;
+    $mail->setFrom( $mailAdressServer, 'Bot Sommeil Profond');
+    $mail->SMTPKeepAlive = true;
+
+    $mail->CharSet = 'UTF-8';
+    //Set the subject line
+
+    $mail->Subject = "New comment : $firstName";
+    $mail->Body = "You receive a new comment from ". $firstName.".<br/><br>
+    From the page :". $_SERVER['HTTP_REFERER'].".<br/><br/>
+    C'est bon signe mon gars !";
+
+    $mail->AltBody = "You receive a new comment from". $firstName.".\n\n
+    From the page :". $_SERVER['HTTP_REFERER'].".\n\n
+    C'est bon signe mon gars !";
 
     $mail->addAddress('romain.geffrault+sub@gmail.com', 'Romain');
 

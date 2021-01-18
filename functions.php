@@ -58,7 +58,8 @@ function handleAddComment() {
     }
     $mainCommentId = property_exists($data, 'mainCommentId') ? $data->mainCommentId : null;
 
-    addComment($data->firstName, $data->comment, $data->articleId, $mainCommentId);
+    addComment($data->firstName, htmlspecialchars($data->comment), $data->articleId, $mainCommentId);
+    sendCommentNotification($data->firstName);
 }
 
 function handleGetArticles() {
