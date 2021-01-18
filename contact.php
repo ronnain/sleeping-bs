@@ -67,7 +67,7 @@ function getAllMailContacts() {
         return false;
     }
 
-    $sth = $bdd->prepare("SELECT * FROM `contact` WHERE `subscribe` = 1");
+    $sth = $bdd->prepare("SELECT * FROM `contact` WHERE `subscribe` = 1 ORDER BY `id`");
     $sth->execute();
     $contacts = array();
 
