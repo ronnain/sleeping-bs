@@ -17,6 +17,7 @@ function handleContactCreation() {
 
     $unsubcribeKey = createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail));
     sendBonus($data->firstName, $data->mail, $unsubcribeKey);
+    sendSubNotification($data->firstName, $data->mail);
 }
 
 function handleUnsubscribe() {
