@@ -119,7 +119,7 @@ function imgToPicture($articleContent, $imgPropertiesList, $articleName) {
         foreach ($imgSizes as $key => $value){
             $picture .= '<source  media="(min-width: '.$value.'px)" srcset="'. $srcLink .$key.'.jpg">';
         }
-        $picture .= '<img src="'. $srcLink .$key.'.jpg" alt="'.$img->alt.'" title="'.$img->title.'" class="'. property_exists($img, 'linkImgCreator') ? "noMarginBottom" : "" .' fullWidth">';
+        $picture .= '<img src="'. $srcLink .$key.'.jpg" alt="'.$img->alt.'" title="'.$img->title.'" class="'. (property_exists($img, 'linkImgCreator') ? "noMarginBottom" : "") .' fullWidth">';
         $picture .= "</picture>";
 
         // Add creator link
