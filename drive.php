@@ -119,7 +119,7 @@ function imgToPicture($articleContent, $imgPropertiesList, $articleName) {
         foreach ($imgSizes as $key => $value){
             $picture .= '<source  media="(min-width: '.$value.'px)" srcset="'. $srcLink .$key.'.jpg">';
         }
-        $picture .= '<img src="'. $srcLink .$key.'.jpg" alt="'.$img->alt.'" title="'.$img->title.'" class="'. (property_exists($img, 'linkImgCreator') ? "noMarginBottom" : "") .' fullWidth">';
+        $picture .= '<img src="'. $srcLink .$key.'.jpg" alt="'. addslashes($img->alt) .'" title="'. addslashes($img->title) .'" class="'. (property_exists($img, 'linkImgCreator') ? "noMarginBottom" : "") .' fullWidth">';
         $picture .= "</picture>";
 
         // Add creator link
@@ -150,34 +150,21 @@ function handleExternalLink($articleContent) {
 }
 
 function getImgPropertiesList($articleContent) {
-    // return object with each img title alt src
+    // return array with each img title alt src
     $imgPropertiesList = array();
-    $nbImg = preg_match_all('/<img/', $articleContent);
+    $pattern = "/<img (?:alt=([\"'])(|.*?[^\\\\])\\1|src=([\"'])(|.*?[^\\\\])\\3|title=([\"'])(|.*?[^\\\\])\\5|.*?)*>/m";
 
-    if (!$nbImg || $nbImg < 0) {
-        return null;
-    }
-
-    $startPosBaliseImg = -1;
+    $nbImg = preg_match_all($pattern, $articleContent, $matches);
 
     for ($i = 0; $i < $nbImg; $i++) {
-        $startPosBaliseImg = strpos($articleContent, '<img', $startPosBaliseImg + 1); // +1 to not found the same balise
         $imgAttributes = new stdClass();
-        $imgAttributes->alt = html_entity_decode(getArttributValue($startPosBaliseImg, 'alt', $articleContent));
-        $imgAttributes->title = html_entity_decode(getArttributValue($startPosBaliseImg, 'title', $articleContent));
-        $imgAttributes->src = getArttributValue($startPosBaliseImg, 'src', $articleContent);
+        $imgAttributes->alt = $matches[2][$i];
+        $imgAttributes->title = $matches[6][$i];
+        $imgAttributes->src = $matches[4][$i];
         $imgPropertiesList[] = $imgAttributes;
     }
-    return $imgPropertiesList;
-}
 
-function getArttributValue($startPosBaliseImg, $attribute, $articleContent) {
-    $attribute = $attribute . '="';
-    $altBaliseStart = strpos($articleContent, $attribute, $startPosBaliseImg);
-    $altBaliseEnd = strpos($articleContent, '"', $altBaliseStart + strlen($attribute));
-    $length = $altBaliseEnd - $altBaliseStart - strlen($attribute);
-    $altProperty = substr($articleContent, $altBaliseStart + strlen($attribute), $length);
-    return $altProperty;
+    return $imgPropertiesList;
 }
 
 function getImgLinkCreditor($imgPropertiesList, $articleContent) {
