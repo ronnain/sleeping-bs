@@ -79,17 +79,17 @@ function getFileDriveContentByName($articleName){
 
 function formatDriveDocContent($htmlContent) {
     $htmlContent = preg_replace('/<head>.*<\/head>/', '', $htmlContent);
-    $htmlContent = preg_replace('/id="[a-zA-Z0-9_= .]*"/', '', $htmlContent);
-    $htmlContent = preg_replace('/class="[a-zA-Z0-9_= .]*"/', '', $htmlContent);
-    $htmlContent = preg_replace('/style="[a-zA-Z0-9_= .:;()\-#&]*"/', '', $htmlContent);
-    $htmlContent = preg_replace('/<span\s*>/', '', $htmlContent);
-    $htmlContent = preg_replace('/<\/span>/', '', $htmlContent);
+    // remove empty span
+    $htmlContent = preg_replace('/<span style="[\w\-;:&#]+"><\/span>/', '', $htmlContent);
+    $htmlContent = cleanSpanStyles($htmlContent);
+    $htmlContent = preg_replace('/<span\s*>(.*?)<\/span>/', '$1', $htmlContent);
+    $htmlContent = preg_replace('/(id|class|style|alt|src|title)=".*?"/', '', $htmlContent);
     $htmlContent = preg_replace('/\s+>/', '>', $htmlContent);
     $htmlContent = preg_replace('/<p><\/p>/', '', $htmlContent);
     $htmlContent = preg_replace('/<(html|\/html|body|\/body)>/', '', $htmlContent);
     $htmlContent = preg_replace('/\s*href="https:\/\/www\.google\.com\/url\?q=/', ' href="', $htmlContent);
+    // utilisé pour les paramètres du lien href
     $htmlContent = preg_replace('/&[a-zA-Z0-9_= .:;()\-#&]*"/', '"', $htmlContent);
-    $htmlContent = preg_replace('/<p><img\s*(alt="[a-zA-Z0-9_= .]*"|src="[a-zA-Z0-9_= .:\-\/]*"|title="[a-zA-Z0-9_= .]*"|\s*)*><\/p>/', '<img/>', $htmlContent);
     return $htmlContent;
 }
 
@@ -218,17 +218,47 @@ function getTitleFromArticleContent($articleContent) {
 }
 
 function getMetaDescriptionFromArticleContent($articleContent) {
-    preg_match('/<p>(&nbsp;|\s)*##(&nbsp;|\s)*(meta|Meta)(&nbsp;|\s)*:[a-zA-Z0-9_= .:\-\/!?;()\-#&°,+-]*(&nbsp;|\s)*##(&nbsp;|\s)*<\/p>/', $articleContent, $matchMeta, PREG_OFFSET_CAPTURE);
-    if (!empty($matchMeta)) {
-        $meta = $matchMeta[0][0];
-        $meta = explode(':', $meta)[1];
-        $meta = explode('##', $meta)[0];
-        return trim($meta);
-    }
-    return null;
+    preg_match('/<p>(?:&nbsp;|\s)*##(?:&nbsp;|\s)*(?:meta|Meta)(?:&nbsp;|\s)*:(.*?)##(?:&nbsp;|\s)*<\/p>/', $articleContent, $matchMeta, PREG_OFFSET_CAPTURE);
+    return !empty($matchMeta[1]) && !empty($matchMeta[0]) ? trim($matchMeta[1][0]) : null;
 }
 
 function removeMetaDescription($articleContent) {
-    return preg_replace('/<p>(&nbsp;|\s)*##(&nbsp;|\s)*(meta|Meta)(&nbsp;|\s)*:[a-zA-Z0-9_= .:\-\/!?;()\-#&°,+-]*(&nbsp;|\s)*##(&nbsp;|\s)*<\/p>/',
+    return preg_replace('/<p>(&nbsp;|\s)*##(&nbsp;|\s)*(meta|Meta)(&nbsp;|\s)*:.*?##(&nbsp;|\s)*<\/p>/',
     '', $articleContent);
+}
+
+function handleStyles($fullStyle, $styleValue, $defautValue) {
+    return $fullStyle && $styleValue && $styleValue !== $defautValue ? $fullStyle . ';' : '';
+}
+
+function cleanSpanStyles($htmlContent) {
+    return preg_replace_callback(
+        '/<span style="(?:(font-weight:(\d+))|(text-decoration:(\w+))|(color:#(\w+))|(font-size:(\w+))|(font-style:(\w+))|font-family:[\w&]+;[\w&]+;|[\w\-&]+:[\w\-&\.]+|;)+">/m',
+        function ($matches) {
+            $styles = "";
+            // Font weight
+            if (!empty($matches[2])) {
+                $styles .= handleStyles($matches[1], $matches[2], "400");
+            }
+            // text decoration
+            if (!empty($matches[4])) {
+                $styles .= handleStyles($matches[3], $matches[4], "none");
+            }
+            // color
+            if (!empty($matches[6])) {
+                $styles .= handleStyles($matches[5], $matches[6], "000000");
+            }
+            // font size
+            if (!empty($matches[8])) {
+                $styles .= handleStyles($matches[7], $matches[8], "11pt");
+            }
+            // font size
+            if (!empty($matches[10])) {
+                $styles .= handleStyles($matches[9], $matches[10], "normal");
+            }
+            // Warning : dont change simple quote to double quote, ortherwise the styles will be removed
+            return !empty($styles) ? "<span style='$styles'>" : "<span>";
+        },
+        $htmlContent
+    );
 }
