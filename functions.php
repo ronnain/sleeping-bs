@@ -242,7 +242,7 @@ function updateArticle() {
 
     $articleContent = prepareArticleProperties($article, $articleContent, $imgPropertiesList, $data);
     if (!$article->metaDesc || !$article->title) {
-        echo 'fail to retrieve meta-description or title';
+        echo "fail to retrieve meta-description or title : meta $article->metaDesc / title : $article->title";
         return;
     }
 
@@ -282,8 +282,8 @@ function prepareArticleProperties($article, $articleContent, $imgPropertiesList,
     // Get the meta description, if the meta is not send in the request, it is retrieved in the content ( ## Meta : ...##)
     if (!property_exists($data, 'metaDesc')) {
         $article->metaDesc = html_entity_decode(getMetaDescriptionFromArticleContent($articleContent), ENT_QUOTES);
-        $articleContent = removeMetaDescription($articleContent);
     }
+    $articleContent = removeMetaDescription($articleContent);
     $article->description = $article->metaDesc;
 
     // Get the img display in articles page

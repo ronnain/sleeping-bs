@@ -126,7 +126,7 @@ function imgToPicture($articleContent, $imgPropertiesList, $articleName) {
         if (property_exists($img, 'linkImgCreator')) {
             $picture .= '<div class="creditImgDiv"><a class="creditImg" href="'.$img->linkImgCreator.'" target="_blank" rel="nofollow noreferrer">Lien Créateur Image</a></div>';
         }
-        $articleContent = preg_replace('/<img\/>/', $picture, $articleContent, 1);
+        $articleContent = preg_replace('/<img\/?>/', $picture, $articleContent, 1);
     }
     return $articleContent;
 }
@@ -208,18 +208,17 @@ function getImgLinkCreditor($imgPropertiesList, $articleContent) {
 }
 
 function getTitleFromArticleContent($articleContent) {
-    preg_match('/<h1>[a-zA-Z0-9_= .:\-\/!?;()\-#&°,+-]*<\/h1>/', $articleContent, $matchTitle, PREG_OFFSET_CAPTURE);
-    if (!empty($matchTitle)) {
-        $title = $matchTitle[0][0];
-        $title = substr($title, 4, strlen($title) - 9); // remove <h1></h1>
-        return $title;
+    preg_match('/<h1>(.*?)<\/h1>/', $articleContent, $matchTitle, PREG_OFFSET_CAPTURE);
+    $title = !empty($matchTitle[1]) && !empty($matchTitle[1][0]) ? trim($matchTitle[1][0]) : null;
+    if (!empty($title)) {
+        $title = preg_replace('/<(.*?)>/', '', $title);
     }
-    return null;
+    return $title;
 }
 
 function getMetaDescriptionFromArticleContent($articleContent) {
     preg_match('/<p>(?:&nbsp;|\s)*##(?:&nbsp;|\s)*(?:meta|Meta)(?:&nbsp;|\s)*:(.*?)##(?:&nbsp;|\s)*<\/p>/', $articleContent, $matchMeta, PREG_OFFSET_CAPTURE);
-    return !empty($matchMeta[1]) && !empty($matchMeta[0]) ? trim($matchMeta[1][0]) : null;
+    return !empty($matchMeta[1]) && !empty($matchMeta[1][0]) ? trim($matchMeta[1][0]) : null;
 }
 
 function removeMetaDescription($articleContent) {
