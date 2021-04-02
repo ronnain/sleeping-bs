@@ -210,7 +210,7 @@ function insertArticle($article) {
         'datePublished' => property_exists($article, 'datePublished') ? $article->datePublished : date("Y-m-d G:i:s"),
         'dateModified' => property_exists($article, 'dateModified') ? $article->dateModified : date("Y-m-d G:i:s"),
         'img' => $article->img,
-        'imgTitle' => $article->imgTitle,
+        'imgTitle' => html_entity_decode($article->imgTitle),
         'articleName' => $article->articleName
         ));
 
@@ -232,7 +232,7 @@ function updateArticleDB($article) {
         'datePublished' => property_exists($article, 'datePublished') ? $article->datePublished : date("Y-m-d G:i:s"),
         'dateModified' => date("Y-m-d G:i:s"),
         'img' => $article->img,
-        'imgTitle' => $article->imgTitle,
+        'imgTitle' => html_entity_decode($article->imgTitle),
         'articleName' => $article->articleName,
         'id' => $article->id
         ));
