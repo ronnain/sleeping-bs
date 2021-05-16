@@ -51,8 +51,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         //Set who the message is to be sent to
         $mail->addAddress($mailAdresse, $firstName);
 
-        $mail->addAttachment('./bonus/4_Points_Fondamentaux_Bon_Dormeur.pdf');
-        $mail->addAttachment('./bonus/Programme_Bon_Dormeur.pdf');
+        $mail->addAttachment('./bonus/Guide_du_bon_dormeur.pdf');
 
         //Set the subject line
         $mail->Subject = "Bienvenue $firstName - Guide du Bon Dormeur";
