@@ -54,6 +54,9 @@ if(isset($_REQUEST['method'])) {
         case "retryImgUpload":
             retryImgUpload();
             break;
+        case "sendMessage":
+            sendMessage();
+            break;
         default:
             echo 'No method found.';
     }

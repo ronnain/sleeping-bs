@@ -64,17 +64,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
         <br/>
         À travers mon blog et ce guide du Bon Dormeur, j\'espère pouvoir t\'apporter les réponses que tu cherches.<br/>
         <br/>
-        Si tu rencontres toujours des problèmes après avoir mis en pratique le Programme du Bon Dormeur, c\'est sans doute que comme moi, tu as un sommeil fragile.<br/>
-        <br/>
-        Ne t\'en fais pas, après 20 ans sans avoir dormi correctement, j\'ai enfin retrouvé un super sommeil.<br/>
-        <br/>
-        C\'est à la porté de tous !<br/>
-        <br/>
-        Pour t\'aider davantage, regarde les services que je propose.<br/>
-        <br/>
-        Tu peux aussi naviguer dans mes différents articles, tu trouveras peut-être une réponse.<br/>
-        <br/>
-        À bientôt,<br/>
+        Passe une bonne nuit,<br/>
         Romain<br/>
         <br/>
         <br/>
@@ -89,17 +79,7 @@ function sendBonus($firstName, $mailAdresse, $unsubcribeKey) {
 
         À travers mon blog et ce guide du Bon Dormeur, j'espère pouvoir t'apporter les réponses que tu cherches.
 
-        Si tu rencontres toujours des problèmes après avoir mis en pratique le Programme du Bon Dormeur, c'est sans doute que comme moi, tu as un sommeil fragile.
-
-        Ne t'en fais pas, après 20 ans sans avoir dormi correctement, j'ai enfin retrouvé un super sommeil.
-
-        C'est à la porté de tous !
-
-        Pour t'aider davantage, regarde les services que je propose.
-
-        Tu peux aussi naviguer dans mes différents articles, tu trouveras peut-être une réponse.
-
-        À bientôt,
+        Passe une bonne nuit,
 
         Romain
 
@@ -217,4 +197,34 @@ function sendCommentNotification($firstName) {
     }
     $mail->clearAddresses();
 }
+
+function sendMailMessage($firstName, $email, $message) {
+    $mail = new PHPMailer(true);
+    setHeaderMail($mail);
+    global $mailAdressServer;
+    $mail->setFrom( $mailAdressServer, 'Message Sommeil Profond');
+    $mail->SMTPKeepAlive = true;
+
+    $mail->CharSet = 'UTF-8';
+    //Set the subject line
+
+    $mail->Subject = "New message from : $firstName $email";
+    $mail->Body = $message;
+    $mail->AltBody = $message;
+
+    $mail->addAddress('romain.geffrault@gmail.com', 'Sommeil Profond');
+    $isSend = false;
+    try {
+       $isSend = $mail->send();
+    } catch (Exception $e) {
+        //Reset the connection to abort sending this message
+        //The loop will continue trying to send to the rest of the list
+        $mail->getSMTPInstance()->reset();
+        $isSend = false;
+    }
+    $mail->clearAddresses();
+
+    return $isSend;
+}
+
 ?>

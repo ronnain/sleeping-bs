@@ -318,3 +318,25 @@ function retryImgUpload() {
     $response->imgList = $listImg;
     echo json_encode($response);
 }
+
+function sendMessage() {
+    // Takes raw data from the request
+    $json = file_get_contents('php://input');
+    // Converts it into a PHP object
+    $data = json_decode($json);
+
+    $return = new stdClass();
+
+    if (empty($data->firstName) || empty($data->email) || empty($data->message)) {
+        $return->error = 'fail retrieving parameters';
+        echo json_encode($return);
+        return;
+    }
+
+    $message = htmlspecialchars($data->message);
+    $message = preg_replace('/\\n/', '<br/>', $message);
+
+    $return->isSend = sendMailMessage($data->firstName, $data->email, $message);
+
+    echo json_encode($return);
+}
