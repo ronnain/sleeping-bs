@@ -120,14 +120,14 @@ function getArticleByName($articleName) {
     $bdd = null;
 }
 
-function getOrtherArticles($articleName) {
+function getOrtherArticles($articleName, $category) {
     $bdd = connect();
     if(!$bdd){
         echo 'Echec de la connexion avec la base de données';
         return false;
     }
 
-    $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` NOT LIKE '$articleName' ORDER BY `id` DESC LIMIT 2");
+    $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` NOT LIKE '$articleName' AND FIND_IN_SET('$category',`categories`)>0 ORDER BY `id` DESC LIMIT 4");
     $sth->execute();
     $articlesArray = array();
 
@@ -201,8 +201,8 @@ function insertArticle($article) {
         return false;
     }
 
-    $req = $bdd->prepare('INSERT INTO `article` (`title`, `description`, `metaDesc`, `datePublished`, `dateModified`, `img`, `imgTitle`, `articleName`)
-     VALUES (:title, :descr, :metaDesc, :datePublished, :dateModified, :img, :imgTitle, :articleName)');
+    $req = $bdd->prepare('INSERT INTO `article` (`title`, `description`, `metaDesc`, `datePublished`, `dateModified`, `img`, `imgTitle`, `articleName`, `categories`)
+     VALUES (:title, :descr, :metaDesc, :datePublished, :dateModified, :img, :imgTitle, :articleName, :categories)');
     $req->execute(array(
         'title' => $article->title,
         'descr' => $article->description,
@@ -211,7 +211,8 @@ function insertArticle($article) {
         'dateModified' => property_exists($article, 'dateModified') ? $article->dateModified : date("Y-m-d G:i:s"),
         'img' => $article->img,
         'imgTitle' => html_entity_decode($article->imgTitle),
-        'articleName' => $article->articleName
+        'articleName' => $article->articleName,
+        'categories' =>  implode(',', $article->categories)
         ));
 
     // Close connection in PDO
@@ -224,7 +225,10 @@ function updateArticleDB($article) {
         echo 'Echec de la connexion avec la base de données';
         return false;
     }
-    $req = $bdd->prepare('UPDATE `article` SET `title` = :title, `description` = :descr, `metaDesc` = :metaDesc, `datePublished` = :datePublished, `dateModified` = :dateModified, `img` = :img, `imgTitle` = :imgTitle, `articleName` = :articleName WHERE `article`.`id` = :id;');
+
+    $categories = implode(',', $article->categories);
+
+    $req = $bdd->prepare('UPDATE `article` SET `title` = :title, `description` = :descr, `metaDesc` = :metaDesc, `datePublished` = :datePublished, `dateModified` = :dateModified, `img` = :img, `imgTitle` = :imgTitle, `articleName` = :articleName, `categories` = :categories WHERE `article`.`id` = :id;');
     $req->execute(array(
         'title' => $article->title,
         'descr' => $article->description,
@@ -234,6 +238,7 @@ function updateArticleDB($article) {
         'img' => $article->img,
         'imgTitle' => html_entity_decode($article->imgTitle),
         'articleName' => $article->articleName,
+        'categories' => $categories,
         'id' => $article->id
         ));
     // Close connection in PDO

@@ -75,11 +75,16 @@ function handleGetArticleByName() {
 }
 
 function handleGetOrtherArticles() {
-    if (!isset($_REQUEST['articleName'])) {
+    if (!isset($_REQUEST['articleName']) || !isset($_REQUEST['category'])) {
         echo 'fail retrieving parameters';
         return;
     }
-    getOrtherArticles(htmlspecialchars($_REQUEST['articleName']));
+
+    $category = $_REQUEST['category'];
+    if ($category === 'all') {
+        $category = 'other';
+    }
+    getOrtherArticles(htmlspecialchars($_REQUEST['articleName']), htmlspecialchars($category));
 }
 
 function handleMailToAll() {
