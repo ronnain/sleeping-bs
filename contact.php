@@ -9,7 +9,7 @@ function createContact($firstName, $mail) {
         return false;
     }
 
-    if ($unsubscribeKey = getContectUnsubscribeKey($mail)) {
+    if ($unsubscribeKey = getContactUnsubscribeKey($mail)) {
         // Warning : lost info resubcribe
         $req = $bdd->prepare('UPDATE `contact` SET `subscribe`= true, `unsubscribeDate`= NULL WHERE `mail` = :mail');
         $req->execute(array(
@@ -34,7 +34,31 @@ function createContact($firstName, $mail) {
     return $unsubscribeKey;
 }
 
-function getContectUnsubscribeKey($mail) {
+function createContactProblem(string $mail, string $message) {
+
+    if (!empty($mail)) {
+        getContactByMail($mail);
+    }
+
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+
+    $req = $bdd->prepare('INSERT INTO `contact_problem` (`idContact`, `mail`, `message`) VALUES (NULL, :mail, :message);');
+    $success = $req->execute(array(
+        'mail' => $mail,
+        'message' => $message,
+        ));
+
+    // Close connection in PDO
+    $bdd = null;
+
+    return $success;
+}
+
+function getContactUnsubscribeKey($mail) {
     $bdd = connect();
     $sth = $bdd->prepare("SELECT `unsubscribe` FROM `contact` WHERE `mail` = :mail ");
     $sth->execute(array(
@@ -57,6 +81,19 @@ function unsubscribeContact($unsubscribeKey) {
         'unsubscribe' => $unsubscribeKey
         ));
     // Close connection in PDO
+    $bdd = null;
+}
+
+function getContactByMail(string $mail) {
+    $bdd = connect();
+    if(!$bdd){
+        echo 'Echec de la connexion avec la base de données';
+        return false;
+    }
+    $req = $bdd->prepare('SELECT `id`  FROM `contact` WHERE `mail` LIKE :mail');
+    $req->execute(array(
+        'mail' => $mail
+        ));
     $bdd = null;
 }
 

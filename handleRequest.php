@@ -57,6 +57,9 @@ if(isset($_REQUEST['method'])) {
         case "sendMessage":
             sendMessage();
             break;
+        case "storeContactProblem":
+            storeContactProblem();
+            break;
         default:
             echo 'No method found.';
     }

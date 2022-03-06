@@ -20,6 +20,23 @@ function handleContactCreation() {
     sendSubNotification($data->firstName, $data->mail);
 }
 
+function storeContactProblem() {
+    // Takes raw data from the request
+    $json = file_get_contents('php://input');
+    // Converts it into a PHP object
+    $data = json_decode($json);
+    if (!property_exists($data, 'message')) {
+        echo json_encode('fail retrieving parameters');
+        return null;
+    }
+
+    $mail = isset($data->mail) ? $data->mail : null;
+
+    $success = createContactProblem(htmlspecialchars($mail), htmlspecialchars($data->message));
+    sendContactProblem(htmlspecialchars($mail), htmlspecialchars($data->message));
+    echo json_encode($success);
+}
+
 function handleUnsubscribe() {
     // Takes raw data from the request
     $json = file_get_contents('php://input');

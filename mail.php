@@ -167,6 +167,35 @@ function sendSubNotification($firstName, $email) {
     $mail->clearAddresses();
 }
 
+function sendContactProblem($email, $message) {
+    $mail = new PHPMailer(true);
+    setHeaderMail($mail);
+    global $mailAdressServer;
+    $mail->setFrom( $mailAdressServer, 'Bot Sommeil Profond');
+    $mail->SMTPKeepAlive = true;
+
+    $mail->CharSet = 'UTF-8';
+    //Set the subject line
+
+    $mail->Subject = "New problem";
+    $mail->Body = "You receive a new problem from : ".$email.".<br/><br>".
+    $message;
+
+    $mail->AltBody = "You receive a new problem from : ".$email.".\n\n".
+    $message;
+
+    $mail->addAddress('romain.geffrault+contactproblem@gmail.com', 'Romain');
+
+    try {
+        $mail->send();
+    } catch (Exception $e) {
+        //Reset the connection to abort sending this message
+        //The loop will continue trying to send to the rest of the list
+        $mail->getSMTPInstance()->reset();
+    }
+    $mail->clearAddresses();
+}
+
 function sendCommentNotification($firstName) {
     $mail = new PHPMailer(true);
     setHeaderMail($mail);
