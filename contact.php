@@ -2,7 +2,7 @@
 require_once 'bddConnexion.php';
 require_once 'modeles.php';
 
-function createContact($firstName, $mail) {
+function createContact($firstName, $mail, $referer) {
     $bdd = connect();
     if(!$bdd){
         echo 'Echec de la connexion avec la base de données';
@@ -25,7 +25,7 @@ function createContact($firstName, $mail) {
         'firstName' => $firstName,
         'mail' => $mail,
         'unsubscribe' => $unsubscribeKey,
-        'source' => $_SERVER['HTTP_REFERER']
+        'source' => $referer
         ));
 
     // Close connection in PDO

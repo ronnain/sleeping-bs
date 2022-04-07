@@ -14,10 +14,10 @@ function handleContactCreation() {
         echo 'fail retrieving parameters';
         return null;
     }
-
-    $unsubcribeKey = createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail));
+    $referer = property_exists($data, 'referer') ? $data->referer : $_SERVER['HTTP_REFERER'];
+    $unsubcribeKey = createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail), $referer);
     sendBonus($data->firstName, $data->mail, $unsubcribeKey);
-    sendSubNotification($data->firstName, $data->mail);
+    sendSubNotification($data->firstName, $data->mail, $referer);
 }
 
 function storeContactProblem() {

@@ -136,7 +136,7 @@ function sendTextMailToAll($subject, $body, $contacts, $altBody) {
     echo '{ "success": true }';
 }
 
-function sendSubNotification($firstName, $email) {
+function sendSubNotification($firstName, $email, $referer) {
     $mail = new PHPMailer(true);
     setHeaderMail($mail);
     global $mailAdressServer;
@@ -148,11 +148,11 @@ function sendSubNotification($firstName, $email) {
 
     $mail->Subject = "New sub : $firstName";
     $mail->Body = "You receive a new sub from ". $firstName.": ".$email.".<br/><br>
-    From the page :". $_SERVER['HTTP_REFERER'].".<br/><br/>
+    From the page : ". $referer .".<br/><br/>
     Putain continue comme ça! Tu gères ! :D";
 
     $mail->AltBody = "You receive a new sub from $firstName ($email).\n
-    From the page :". $_SERVER['HTTP_REFERER'].".\n
+    From the page : ". $referer .".\n
     Putain continue comme ça! Tu gères ! :D";
 
     $mail->addAddress('romain.geffrault+sub@gmail.com', 'Romain');
