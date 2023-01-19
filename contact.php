@@ -2,7 +2,7 @@
 require_once 'bddConnexion.php';
 require_once 'modeles.php';
 
-function createContact($firstName, $mail, $referer) {
+function createContact($firstName, $mail, $referer, $browser) {
     $bdd = connect();
     if(!$bdd){
         echo 'Echec de la connexion avec la base de données';
@@ -20,12 +20,13 @@ function createContact($firstName, $mail, $referer) {
 
     $unsubscribeKey = bin2hex(random_bytes(32));
 
-    $req = $bdd->prepare('INSERT INTO contact(firstName, mail, creationDate, unsubscribe, source) VALUES(:firstName, :mail, NOW(), :unsubscribe, :source)');
+    $req = $bdd->prepare('INSERT INTO contact(firstName, mail, creationDate, unsubscribe, source, browser) VALUES(:firstName, :mail, NOW(), :unsubscribe, :source, :browser)');
     $req->execute(array(
         'firstName' => $firstName,
         'mail' => $mail,
         'unsubscribe' => $unsubscribeKey,
-        'source' => $referer
+        'source' => $referer,
+        'browser' => $browser
         ));
 
     // Close connection in PDO

@@ -4,6 +4,30 @@ require 'mail.php';
 require 'img.php';
 require 'contact.php';
 
+function getBrowser()
+{
+  $user_agent = $_SERVER['HTTP_USER_AGENT'];
+  $browser = "N/A";
+
+  $browsers = [
+    '/msie/i' => 'Internet explorer',
+    '/firefox/i' => 'Firefox',
+    '/safari/i' => 'Safari',
+    '/chrome/i' => 'Chrome',
+    '/edge/i' => 'Edge',
+    '/opera/i' => 'Opera',
+    '/mobile/i' => 'Mobile browser',
+  ];
+
+  foreach ($browsers as $regex => $value) {
+    if (preg_match($regex, $user_agent)) {
+      $browser = $value;
+    }
+  }
+
+  return $browser;
+}
+
 function handleContactCreation() {
     // Takes raw data from the request
     $json = file_get_contents('php://input');
@@ -15,9 +39,10 @@ function handleContactCreation() {
         return null;
     }
     $referer = property_exists($data, 'referer') ? $data->referer : $_SERVER['HTTP_REFERER'];
-    $unsubcribeKey = createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail), $referer);
+    $browser = getBrowser();
+    $unsubcribeKey = createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail), $referer, $browser);
     sendBonus($data->firstName, $data->mail, $unsubcribeKey);
-    sendSubNotification($data->firstName, $data->mail, $referer);
+    sendSubNotification($data->firstName, $data->mail, $referer, $browser);
 }
 
 function storeContactProblem() {
