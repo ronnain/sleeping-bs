@@ -1,8 +1,10 @@
 <?php
-require 'bddFunctions.php';
-require 'mail.php';
+require_once 'bddFunctions.php';
 require 'img.php';
 require 'contact.php';
+require_once 'mail/Mail.php';
+
+use Mail\Mail;
 
 function getBrowser()
 {
@@ -41,8 +43,8 @@ function handleContactCreation() {
     $referer = property_exists($data, 'referer') ? $data->referer : $_SERVER['HTTP_REFERER'];
     $browser = getBrowser();
     $unsubcribeKey = createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail), $referer, $browser);
-    sendBonus($data->firstName, $data->mail, $unsubcribeKey);
-    sendSubNotification($data->firstName, $data->mail, $referer, $browser);
+    Mail::sendBonus($data->firstName, $data->mail, $unsubcribeKey);
+    Mail::sendSubNotification($data->firstName, $data->mail, $referer, $browser);
 }
 
 function storeContactProblem() {
@@ -58,7 +60,7 @@ function storeContactProblem() {
     $mail = isset($data->mail) ? $data->mail : null;
 
     $success = createContactProblem(htmlspecialchars($mail), htmlspecialchars($data->message));
-    sendContactProblem(htmlspecialchars($mail), htmlspecialchars($data->message));
+    Mail::sendContactProblem(htmlspecialchars($mail), htmlspecialchars($data->message));
     echo json_encode($success);
 }
 
@@ -101,7 +103,7 @@ function handleAddComment() {
     $mainCommentId = property_exists($data, 'mainCommentId') ? $data->mainCommentId : null;
 
     addComment($data->firstName, htmlspecialchars($data->comment), $data->articleId, $mainCommentId);
-    sendCommentNotification($data->firstName);
+    Mail::sendCommentNotification($data->firstName);
 }
 
 function handleGetArticles() {
@@ -158,7 +160,7 @@ function handleMailToAll() {
     $altBody = str_replace('\"', '"', $altBody);
 
     $contacts = getAllMailContacts();
-    sendTextMailToAll($data->object,$htmlBody, $contacts, $altBody);
+    Mail::sendTextMailToAll($data->object,$htmlBody, $contacts, $altBody);
 }
 
 function handleGetAllMails() {
@@ -383,7 +385,7 @@ function sendMessage() {
     $message = htmlspecialchars($data->message);
     $message = preg_replace('/\\n/', '<br/>', $message);
 
-    $return->isSend = sendMailMessage($data->firstName, $data->email, $message);
+    $return->isSend = Mail::sendMailMessage($data->firstName, $data->email, $message);
 
     echo json_encode($return);
 }

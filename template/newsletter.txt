@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Email Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta content="telephone=no" name="format-detection" />
+
+
+        <style type="text/css" media="screen">
+                /* Linked Styles */
+                body { padding:0 !important; margin:0 !important; display:block !important; background:#f8f8f8; -webkit-text-size-adjust:none }
+                a { color:#33aecb; text-decoration:none }
+
+                /* Mobile styles */
+                @media screen and (max-device-width: 480px), screen and (max-width: 480px) {
+
+                        table[class='w320'] { width: 320px !important; }
+                        table[class='w210'] { width: 210px !important; }
+                        div[class='mobile-br-10'] { height: 10px !important; }
+                        div[class='mobile-br-15'] { height: 15px !important; }
+                        div[class='mobile-br-20'] { height: 20px !important; }
+                        div[class='mobile-br-25'] { height: 25px !important; }
+                        div[class='hide-for-mobile'], span[class='hide-for-mobile'], td[class='header-spacing'], td[class='spacing'], td[class='nav'], span[class='hide-for-mobile'] { display: none !important;  width: 0 !important; height: 0 !important; font-size: 0 !important; line-height: 0 !important; }
+
+                        td[class='column'] { float: left !important; display: block !important; width: 300px !important; height: auto !important; }
+                        img[class='w280'] { width: 280px !important; height: auto !important; }
+                        img[class='wgmail'] { width: 320px !important; max-width: 320px !important; min-width: 320px !important; }
+
+                        td[class='w10'] { width: 10px !important; }
+                        img[class='logo'], img[class='w210'] { width: 210px !important; height: auto !important; }
+                        img[class='w250'] { width: 250px !important; height: auto !important; }
+
+                        td[class='text'] { font-size: 12px !important; line-height: 16px !important; }
+                        td[class='text-button'] { font-size: 16px !important; line-height: 20px !important; }
+
+                }
+        </style>
+
+</head>
+<body class="body" style="padding:0 !important; margin:0 !important; display:block !important; background:#f8f8f8; -webkit-text-size-adjust:none">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f8f8f8">
+        <tr>
+                <td align="center" valign="top">
+                        <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="#f8f8f8" class="w320">
+                                <tr>
+                                        <td>
+                                                <div style="font-size:0pt; line-height:0pt; height:1px"><img src="images/empty.gif" width="600" height="1" style="height:1px; max-width: 600px; min-width: 600px;" class="wgmail" alt="" /></div>
+                                                <div class="hide-for-mobile">
+                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+                                                </div>
+                                                <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+                                                <div style="font-size:0pt; line-height:0pt; height:10px; background:#33aecb; "><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+
+                                                <!-- Container -->
+                                                <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff">
+                                                        <tr>
+                                                                <td>
+                                                                        <div class="hide-for-mobile">
+                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="display:block; height:30px" alt="" /></div>
+
+                                                                        </div>
+                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="display:block; height:30px" alt="" /></div>
+
+
+                                                                        <!-- Head -->
+                                                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                                                <tr>
+                                                                                        <td class="img-center" style="font-size:0pt; line-height:0pt; text-align:center">
+                                                                                                <a href="#" target="_blank"><img src="images/logo.jpg" width="390" height="39" alt="EquipBoard" class="logo" border="0" /></a>
+                                                                                        </td>
+                                                                                </tr>
+                                                                        </table>
+                                                                        <!-- End Head -->
+
+                                                                        <div class="hide-for-mobile">
+                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="display:block; height:30px" alt="" /></div>
+
+                                                                        </div>
+                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="display:block; height:30px" alt="" /></div>
+
+                                                                        <div style="font-size:0pt; line-height:0pt; height:5px; background:#f8f8f8; "><img src="images/empty.gif" width="1" height="5" style="height:5px" alt="" /></div>
+
+                                                                        <div class="hide-for-mobile">
+                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:25px"><img src="images/empty.gif" width="1" height="25" style="display:block; height:25px" alt="" /></div>
+
+                                                                        </div>
+                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:25px"><img src="images/empty.gif" width="1" height="25" style="display:block; height:25px" alt="" /></div>
+
+
+                                                                        <!-- Main -->
+                                                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                                                <tr>
+                                                                                        <td class="w10" width="20"></td>
+                                                                                        <td class="text" style="color:#2c2325; font-family:Helvetica, Arial, sans-serif; font-size:18px; line-height:22px; text-align:left">
+                                                                                                <div class="text-orange" style="color:#f85600; font-family:Helvetica, Arial, sans-serif; font-size:18px; line-height:22px; text-align:left">
+                                                                                                        Hi username,
+                                                                                                </div>
+                                                                                                <div class="hide-for-mobile">
+                                                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:12px"><img src="images/empty.gif" width="1" height="12" style="display:block; height:12px" alt="" /></div>
+
+                                                                                                </div>
+                                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:12px"><img src="images/empty.gif" width="1" height="12" style="display:block; height:12px" alt="" /></div>
+
+                                                                                                Exciting things are happening at <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">Equipboard</span></a>, and it's been awhile since you've been back.
+                                                                                                <div class="hide-for-mobile">
+                                                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:12px"><img src="images/empty.gif" width="1" height="12" style="display:block; height:12px" alt="" /></div>
+
+                                                                                                </div>
+                                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:12px"><img src="images/empty.gif" width="1" height="12" style="display:block; height:12px" alt="" /></div>
+
+                                                                                                <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">Equipboard</span></a> is the place to stay up to date with the your favorite pros. Come back to <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">Equipboard</span></a> and see what's new!
+                                                                                                <div class="hide-for-mobile">
+                                                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:17px"><img src="images/empty.gif" width="1" height="17" style="display:block; height:17px" alt="" /></div>
+
+                                                                                                </div>
+                                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:17px"><img src="images/empty.gif" width="1" height="17" style="display:block; height:17px" alt="" /></div>
+
+                                                                                                <div class="img-center" style="font-size:0pt; line-height:0pt; text-align:center">
+                                                                                                        <a href="#" target="_blank"><img src="images/image.jpg" width="465" height="272" class="w250" border="0" /></a>
+                                                                                                </div>
+                                                                                                <div class="hide-for-mobile">
+                                                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+                                                                                                </div>
+                                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+                                                                                                Exciting things are happening at <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">Equipboard</span></a>, and it's been awhile since you've been back.
+                                                                                                <div class="hide-for-mobile">
+                                                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:12px"><img src="images/empty.gif" width="1" height="12" style="display:block; height:12px" alt="" /></div>
+
+                                                                                                </div>
+                                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:12px"><img src="images/empty.gif" width="1" height="12" style="display:block; height:12px" alt="" /></div>
+
+                                                                                                <strong>
+                                                                                                        <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">Equipboard</span></a> is the place to stay up to date with the your favorite pros. Come back to <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">Equipboard</span></a> and see what's new!
+                                                                                                </strong>
+                                                                                                <div class="hide-for-mobile">
+                                                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:22px"><img src="images/empty.gif" width="1" height="22" style="display:block; height:22px" alt="" /></div>
+
+                                                                                                </div>
+                                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:22px"><img src="images/empty.gif" width="1" height="22" style="display:block; height:22px" alt="" /></div>
+
+
+                                                                                                <!-- Button -->
+                                                                                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                                                                        <tr>
+                                                                                                                <td align="center" valign="top">
+                                                                                                                        <table cellpadding="0" cellspacing="0" border="0" width="391" class="w210" bgcolor="#f85600">
+                                                                                                                                <tr>
+                                                                                                                                        <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="1">
+                                                                                                                                                <div class="hide-for-mobile">
+                                                                                                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="display:block; height:30px" alt="" /></div>
+
+                                                                                                                                                </div>
+                                                                                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:48px"><img src="images/empty.gif" width="1" height="48" style="display:block; height:48px" alt="" /></div>
+
+                                                                                                                                        </td>
+                                                                                                                                        <td class="text-button" style="color:#ffffff; font-family:Helvetica, Arial, sans-serif; font-size:30px; line-height:34px; text-align:center; font-weight:bold">
+                                                                                                                                                <a href="#" target="_blank" class="link-btn" style="color:#ffffff; text-decoration:none"><span class="link-btn" style="color:#ffffff; text-decoration:none">Go to Equipboard</span></a>
+                                                                                                                                        </td>
+                                                                                                                                </tr>
+                                                                                                                        </table>
+                                                                                                                </td>
+                                                                                                        </tr>
+                                                                                                </table>
+                                                                                                <!-- End Button -->
+                                                                                        </td>
+                                                                                        <td class="w10" width="20"></td>
+                                                                                </tr>
+                                                                        </table>
+                                                                        <!-- End Main -->
+
+                                                                        <div class="hide-for-mobile">
+                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:25px"><img src="images/empty.gif" width="1" height="25" style="display:block; height:25px" alt="" /></div>
+
+                                                                        </div>
+                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:25px"><img src="images/empty.gif" width="1" height="25" style="display:block; height:25px" alt="" /></div>
+
+                                                                        <div style="font-size:0pt; line-height:0pt; height:5px; background:#f8f8f8; "><img src="images/empty.gif" width="1" height="5" style="height:5px" alt="" /></div>
+
+                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+
+                                                                        <!-- Footer -->
+                                                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                                                <tr>
+                                                                                        <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="20"></td>
+                                                                                        <td align="center" valign="top">
+                                                                                                <!-- Social -->
+                                                                                                <table cellpadding="0" cellspacing="0" border="0">
+                                                                                                        <tr>
+                                                                                                                <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="32">
+                                                                                                                        <a href="#" target="_blank"><img src="images/icon_f.jpg" width="32" height="32" border="0" /></a>
+                                                                                                                </td>
+                                                                                                                <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="28"></td>
+                                                                                                                <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="32">
+                                                                                                                        <a href="#" target="_blank"><img src="images/icon_t.jpg" width="32" height="32" border="0" /></a>
+                                                                                                                </td>
+                                                                                                        </tr>
+                                                                                                </table>
+                                                                                                <!-- End Social -->
+                                                                                                <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+
+                                                                                                <div class="text-footer" style="color:#8f8f8f; font-family:Helvetica, Arial, sans-serif; font-size:12px; line-height:16px; text-align:center; font-weight:bold">
+                                                                                                        This email was sent by Equipboard to <a href="mailto:test@gmail.com" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">test@gmail.com</span></a>. <div style="display:block; font-size:0pt; line-height:0pt; height:5px"><img src="images/empty.gif" width="1" height="5" style="display:block; height:5px" alt="" /></div>
+
+                                                                                                        You can <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">edit your notification settings on Equipboard</span></a> or <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">unsubscribe</span></a>. <div style="display:block; font-size:0pt; line-height:0pt; height:5px"><img src="images/empty.gif" width="1" height="5" style="display:block; height:5px" alt="" /></div>
+
+                                                                                                        701 Brazos Street, Suite 1616, Austin, TX 78703 <div style="display:block; font-size:0pt; line-height:0pt; height:5px"><img src="images/empty.gif" width="1" height="5" style="display:block; height:5px" alt="" /></div>
+
+                                                                                                        <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">Unsubscribe</span></a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">View this email in your browser</span></a> &nbsp;&nbsp;|&nbsp;&nbsp; <a href="#" target="_blank" class="link" style="color:#33aecb; text-decoration:none"><span class="link" style="color:#33aecb; text-decoration:none">Link3</span></a>
+                                                                                                </div>
+
+                                                                                        </td>
+                                                                                        <td class="img" style="font-size:0pt; line-height:0pt; text-align:left" width="20"></td>
+                                                                                </tr>
+                                                                        </table>
+                                                                        <!-- End Footer -->
+
+                                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+                                                                </td>
+                                                        </tr>
+                                                </table>
+                                                <!-- End Container -->
+
+                                                <div style="font-size:0pt; line-height:0pt; height:10px; background:#33aecb; "><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                <div class="hide-for-mobile">
+                                                        <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+                                                </div>
+                                                <div style="display:block; font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="display:block; height:20px" alt="" /></div>
+
+                                        </td>
+                                </tr>
+                        </table>
+                </td>
+        </tr>
+</table>
+
+</body>
+</html>

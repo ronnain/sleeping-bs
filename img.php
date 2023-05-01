@@ -6,7 +6,7 @@
         int $newHeight = 0,
         int $width = 0,
         int $height = 0,
-        string $outExt = 'DEFAULT'
+        ?string $outExt = null
     ) : ?string
     {
         if (!$newPath or !$imagePath) {

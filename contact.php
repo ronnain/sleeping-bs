@@ -117,3 +117,7 @@ function getAllMailContacts() {
 
     return $contacts;
 }
+/*
+function countSubByMounth() {
+    SELECT DATE_FORMAT(creationDate, '%Y-%M') as date, COUNT(*) as entityCount FROM `contact` GROUP BY YEAR(creationDate), MONTH(creationDate)
+} */

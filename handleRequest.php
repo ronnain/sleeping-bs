@@ -1,6 +1,6 @@
 <?php
-require 'functions.php';
-require 'drive.php';
+require_once 'functions.php';
+require_once 'drive.php';
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST,GET,OPTIONS');
