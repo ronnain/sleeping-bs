@@ -207,11 +207,12 @@ class Mail {
 
         $mail->Subject = "New problem";
         $mail->Body = "You receive a new problem from : ".$email.".<br/><br>".
-        $message;
+                            $message;
 
         $mail->AltBody = "You receive a new problem from : ".$email.".\n\n".
-        $message;
+                            $message;
 
+        $mail->addReplyTo($email);
         $mail->addAddress('romain.geffrault+contactproblem@gmail.com', 'Romain');
 
         try {
@@ -269,6 +270,7 @@ class Mail {
         $mail->Body = $message;
         $mail->AltBody = $message;
 
+        $mail->addReplyTo($email, $firstName);
         $mail->addAddress('romain.geffrault@gmail.com', 'Sommeil Profond');
         $isSend = false;
         try {
