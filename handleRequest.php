@@ -1,6 +1,9 @@
 <?php
 require_once 'functions.php';
 require_once 'drive.php';
+require_once './mail/NewsLetterCampaign.php';
+
+use Mail\NewsLetterCampaign;
 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST,GET,OPTIONS');
@@ -59,6 +62,9 @@ if(isset($_REQUEST['method'])) {
             break;
         case "storeContactProblem":
             storeContactProblem();
+            break;
+        case "getLastNewsletterCampaign":
+            echo json_encode(NewsLetterCampaign::getNewsletterCampaignById(4)->id);
             break;
         default:
             echo 'No method found.';

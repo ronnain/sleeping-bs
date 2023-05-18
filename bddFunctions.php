@@ -47,10 +47,7 @@ function getComments($articleId) {
 
 function addComment($firstName, $comment, $articleId, $mainCommentId = null) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     $req = $bdd->prepare('INSERT INTO `comments` (`firstName`, `date`, `comment`, `mainCommentId`, `articleId`) VALUES (:firstName, NOW(), :comment, :mainCommentId, :articleId)');
     $req->execute(array(
@@ -68,10 +65,7 @@ function addComment($firstName, $comment, $articleId, $mainCommentId = null) {
 
 function getArticles() {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     $sth = $bdd->prepare("SELECT * FROM `article` WHERE 1 ORDER BY `datePublished` DESC");
     $sth->execute();
@@ -87,10 +81,7 @@ function getArticles() {
 
 function getArticlesData() {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     $sth = $bdd->prepare("SELECT * FROM `article` WHERE 1 ORDER BY `datePublished` DESC");
     $sth->execute();
@@ -105,10 +96,7 @@ function getArticlesData() {
 
 function getArticleByName($articleName) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` LIKE '$articleName'");
     $sth->execute();
@@ -122,10 +110,7 @@ function getArticleByName($articleName) {
 
 function getOrtherArticles($articleName, $category) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` NOT LIKE '$articleName' AND FIND_IN_SET('$category',`categories`)>0 ORDER BY `id` DESC LIMIT 4");
     $sth->execute();
@@ -144,10 +129,7 @@ function getOrtherArticles($articleName, $category) {
 
 function userLogin($pseudo, $password) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
     // Check user account
     $response = $bdd->query("SELECT * FROM `user` WHERE `pseudo` LIKE '$pseudo' AND `password` LIKE '$password'")
                      or die( print_r($bdd->errorinfo()));
@@ -174,10 +156,7 @@ function userLogin($pseudo, $password) {
 
 function checkUserToken($pseudo, $token) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
     // Check user account
     $response = $bdd->query("SELECT * FROM `user` WHERE `pseudo` LIKE '$pseudo' AND `token` LIKE '$token' AND `expiryDate` >= NOW()")
                      or die( print_r($bdd->errorinfo()));
@@ -196,10 +175,7 @@ function addNewArticleinfoToBDD($article) {
 
 function insertArticle($article) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     $req = $bdd->prepare('INSERT INTO `article` (`title`, `description`, `metaDesc`, `datePublished`, `dateModified`, `img`, `imgTitle`, `articleName`, `categories`)
      VALUES (:title, :descr, :metaDesc, :datePublished, :dateModified, :img, :imgTitle, :articleName, :categories)');
@@ -221,10 +197,7 @@ function insertArticle($article) {
 
 function updateArticleDB($article) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     $categories = implode(',', $article->categories);
 
@@ -247,10 +220,7 @@ function updateArticleDB($article) {
 
 function getArticleConfigDataByName($articleName) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     // Get article
     $sth = $bdd->prepare("SELECT * FROM `article` WHERE `articleName` LIKE '$articleName'");
@@ -290,10 +260,7 @@ function updateArticleTable($article){
 
 function checkArticleExists($articleName){
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
     $response = $bdd->query("SELECT `id` FROM `article` WHERE `articleName` LIKE '$articleName'")
     or die( print_r($bdd->errorinfo()));
     // if the user not exist, return
@@ -304,10 +271,7 @@ function checkArticleExists($articleName){
 
 function checkArticleConfigExists($articleId){
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
     $response = $bdd->query("SELECT `id` FROM `articleconfig` WHERE `idArticle` = $articleId")
     or die( print_r($bdd->errorinfo()));
     // if the user not exist, return
@@ -328,10 +292,7 @@ function updateArticleConfigTable($imgPropertiesList, $articleId) {
 
 function insertArticleConfig($articleConfig, $articleId) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
 
     $req = $bdd->prepare('INSERT INTO `articleconfig` (`idArticle`, `img`) VALUES (:idArticle, :img);');
     $req->execute(array(
@@ -345,10 +306,7 @@ function insertArticleConfig($articleConfig, $articleId) {
 
 function updateArticleConfigDB($articleConfig, $articleId) {
     $bdd = connect();
-    if(!$bdd){
-        echo 'Echec de la connexion avec la base de données';
-        return false;
-    }
+
     $req = $bdd->prepare('UPDATE `articleconfig` SET `img` = :img WHERE `articleconfig`.`idArticle` = :idArticle');
     $req->execute(array(
         'img' => json_encode($articleConfig->img),

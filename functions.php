@@ -1,11 +1,14 @@
 <?php
 require_once 'bddFunctions.php';
 require 'img.php';
-require 'contact.php';
+require_once 'contact/contact.php';
 require_once 'mail/Mail.php';
+require_once 'mail/NewsletterCampaign.php';
 
 use Mail\Mail;
-
+use Contact\Contact;
+use Mail\NewsLetterCampaign;
+// TODO check user list
 function getBrowser()
 {
   $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -42,7 +45,7 @@ function handleContactCreation() {
     }
     $referer = property_exists($data, 'referer') ? $data->referer : $_SERVER['HTTP_REFERER'];
     $browser = getBrowser();
-    $unsubcribeKey = createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail), $referer, $browser);
+    $unsubcribeKey = Contact::createContact(htmlspecialchars($data->firstName), htmlspecialchars($data->mail), $referer, $browser);
     Mail::sendBonus($data->firstName, $data->mail, $unsubcribeKey);
     Mail::sendSubNotification($data->firstName, $data->mail, $referer, $browser);
 }
@@ -59,7 +62,7 @@ function storeContactProblem() {
 
     $mail = isset($data->mail) ? $data->mail : null;
 
-    $success = createContactProblem(htmlspecialchars($mail), htmlspecialchars($data->message));
+    $success = Contact::createContactProblem(htmlspecialchars($mail), htmlspecialchars($data->message));
     Mail::sendContactProblem(htmlspecialchars($mail), htmlspecialchars($data->message));
     echo json_encode($success);
 }
@@ -75,7 +78,7 @@ function handleUnsubscribe() {
         return;
     }
     $unsubscribeKey = htmlspecialchars($data->key);
-    unsubscribeContact($unsubscribeKey);
+    Contact::unsubscribeContact($unsubscribeKey);
     echo '{ "success": true }';
 }
 
@@ -159,8 +162,17 @@ function handleMailToAll() {
     $altBody = preg_replace('/(^"|"$)*/', '', $altBody);
     $altBody = str_replace('\"', '"', $altBody);
 
-    $contacts = getAllMailContacts();
-    Mail::sendTextMailToAll($data->object,$htmlBody, $contacts, $altBody);
+    $subject = $data->object;
+
+    $contacts = Contact::getAllMailContacts();
+    array_push($contacts, Contact::getContactEndCampaign());
+
+    NewsLetterCampaign::storeNewsletterCampaign($subject,$htmlBody, $contacts);
+
+    $newsletterCampaign = NewsLetterCampaign::getLastNewsletterCampaign();
+    $response = NewsLetterCampaign::sendNewsletterCampaign($newsletterCampaign);
+// TODO ABORT USER CONNECt
+    echo json_encode($response);
 }
 
 function handleGetAllMails() {
@@ -171,7 +183,7 @@ function handleGetAllMails() {
         print_r(json_encode("Token expiry"));
         return;
     }
-    $contacts = getAllMailContacts();
+    $contacts = Contact::getAllMailContacts();
     print_r(json_encode($contacts));
 }
 

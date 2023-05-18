@@ -10,5 +10,9 @@ function connect(){
     {
         die('Erreur : ' . $e->getMessage());
     }
+    if (!$bdd) {
+        echo 'Echec de la connexion avec la base de données';
+        die;
+    }
     return $bdd;
 }
