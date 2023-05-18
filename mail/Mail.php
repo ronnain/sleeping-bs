@@ -109,66 +109,6 @@ class Mail {
         }
     }
 
-
-    // static function sendTextMailToAll($subject, $body, $contacts, $altBody) {
-    //     // TODO STORE CAMPAIGN MAIL
-    //     // TODO store subject
-    //     // ignore_user_abort(true); The script will continue even if the connection with the user is closed
-
-    //     global $siteWebLink;
-
-    //     $mail = new PHPMailer(true);
-    //     Mail::setHeadermail($mail);
-    //     $mail->SMTPKeepAlive = true;
-
-    //     $mail->CharSet = 'UTF-8';
-    //     //Set the subject line
-    //     $mail->Subject = $subject;
-
-    //     $mailAddressSend = [];
-    //     $wrongMailAddress = [];
-
-    //     foreach ($contacts as $contact) {
-    //         $subscriberMail = $contact["mail"];
-    //         if (array_search($subscriberMail, $mailAddressSend) !== false) {
-    //             var_dump($subscriberMail);
-    //             continue;
-    //         }
-    //         try {
-    //             $mail->addAddress($subscriberMail, $contact["firstName"]);
-    //             $unsubcribeLink = $siteWebLink.'/desabonnement/'.$contact["unsubscribe"];
-    //             $mail->Body = NewsletterTemplate::get($body, $unsubcribeLink, $subscriberMail);
-    //             $mail->AltBody = "$altBody \n\n $unsubcribeLink";
-    //         } catch (Exception $e) {
-    //             array_push($wrongMailAddress, $subscriberMail);
-    //             echo 'Invalid address skipped: ' . htmlspecialchars($subscriberMail) . '<br>';
-    //             continue;
-    //         }
-    //         try {
-    //             if ($mail->send()) {
-    //                 array_push($mailAddressSend, $subscriberMail);
-    //             } else {
-    //                 array_push($wrongMailAddress, $subscriberMail);
-    //             }
-    //             break;
-    //         } catch (Exception $e) {
-    //             echo 'Mailer Error (' . htmlspecialchars($subscriberMail) . ') ' . $mail->ErrorInfo . '<br>';
-    //             //Reset the connection to abort sending this message
-    //             //The loop will continue trying to send to the reset of the list
-    //             $mail->getSMTPInstance()->reset();
-    //         }
-    //         $mail->clearAddresses();
-    //     }
-    //     die;
-    //     $result = new \stdClass();
-    //     $result->success = true;
-    //     $result->sendTo = $mailAddressSend;
-    //     $result->totalSend = sizeof($mailAddressSend);
-    //     $result->wrongMail = $wrongMailAddress;
-
-    //     echo json_encode($result);
-    // }
-
     static function removeHTMLTagAndKeepLink($html) {
         $textString = preg_replace_callback('/<a\s+(?:[^>]*?\s+)?href=(["\'])(.*?)\1[^>]*>(.*?)<\/a>/i', function($match) {
             $linkText = $match[3];

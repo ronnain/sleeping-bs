@@ -85,7 +85,7 @@ class NewsLetterCampaign {
     static function newsletterSendFailed($bdd, NewsLetterCampaignModel $newsletterCampaign, ContactModel $contact) {
         $newsletterCampaign->not_send_total++;
         $newsletterCampaign->contacts = self::removeContactFromListToSend($contact->id, $newsletterCampaign->contacts);
-        array_push($newsletterCampaign->invalid_contact, $contact); // TODO SQL WHERE
+        array_push($newsletterCampaign->invalid_contact, $contact);
         $req = $bdd->prepare('UPDATE `newsletter_campaign` SET `contacts` = :contacts, `not_send_total` = :send_total, `invalid_contact` = :invalid_contact WHERE `id` = :id');
         $result = $req->execute(array(
             'contacts' => json_encode($newsletterCampaign->contacts),
@@ -104,10 +104,6 @@ class NewsLetterCampaign {
     }
 
     static function sendNewsletterCampaign(NewsletterCampaignModel $newsletterCampaign) {
-        // TODO STORE CAMPAIGN MAIL
-        // TODO store subject
-        // ignore_user_abort(true); The script will continue even if the connection with the user is closed
-
 
         global $siteWebLink;
         $bdd = connect();
@@ -124,7 +120,6 @@ class NewsLetterCampaign {
 
 
         foreach ($newsletterCampaign->contacts as $contact) {
-            /** @var ContactModel $contact */
             $subscriberMail = $contact->mail;
             if (array_search($subscriberMail, $mailAddressSend) !== false) {
                 continue;

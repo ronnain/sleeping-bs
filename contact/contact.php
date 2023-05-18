@@ -1,9 +1,13 @@
 <?php
 namespace Contact;
 use Contact\ContactModel;
+use Contact\ContactDto;
 
 require_once 'bddConnexion.php';
 require_once 'modeles.php';
+require_once 'contact/ContactModel.php';
+require_once 'contact/ContactDto.php';
+
 
 class Contact {
 
@@ -63,7 +67,7 @@ class Contact {
             'mail' => $mail
             ));
         $bdd = null;
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        $result = $sth->fetch(\PDO::FETCH_ASSOC);
         return !empty($result) ? $result['unsubscribe'] : null;
     }
 
@@ -89,11 +93,7 @@ class Contact {
     }
 
     static function getAllMailContacts() {
-        $bdd = connect();
-
-        $sth = $bdd->prepare("SELECT * FROM `contact` WHERE `subscribe` = 1 ORDER BY `id`");
-        $sth->execute();
-        $contacts = $sth->fetchAll(\PDO::FETCH_OBJ);
+        $contactsDto = self::getAllMailContactsDTO();
 
         $contacts = array_map(function ($contact) {
                                     return new ContactModel(
@@ -104,11 +104,35 @@ class Contact {
                                         $contact->unsubscribe,
                                         $contact->subscribe,
                                         isset($contact->unsubscribeDate) ? $contact->unsubscribeDate : null,
-                                        isset($contactData->source) ? $contact->source : null,
-                                        isset($contactData->browser) ? $contact->browser : null
+                                        isset($contact->source) ? $contact->source : null,
+                                        isset($contact->browser) ? $contact->browser : null
                                     );
                                 },
-                                $contacts);
+                                $contactsDto);
+
+        return $contacts;
+    }
+
+    static function getAllMailContactsDTO() {
+        $bdd = connect();
+
+        $sth = $bdd->prepare("SELECT * FROM `contact` WHERE `subscribe` = 1 ORDER BY `id`");
+        $sth->execute();
+        $contactsData = $sth->fetchAll(\PDO::FETCH_OBJ);
+
+        $contacts = array_map(function ($contactData) {
+            return new ContactDto(
+                (int)$contactData->id,
+                $contactData->firstName,
+                $contactData->mail,
+                $contactData->creationDate,
+                $contactData->unsubscribe,
+                (bool)$contactData->subscribe,
+                isset($contactData->unsubscribeDate) ? $contactData->unsubscribeDate : null,
+                isset($contactData->source) ? $contactData->source : null,
+                isset($contactData->browser) ? $contactData->browser : null
+            );
+        }, $contactsData);
 
         // Close connection in PDO
         $bdd = null;
@@ -126,8 +150,8 @@ class Contact {
                 $contact->unsubscribe,
                 $contact->subscribe,
                 isset($contact->unsubscribeDate) ? $contact->unsubscribeDate : null,
-                isset($contactData->source) ? $contact->source : null,
-                isset($contactData->browser) ? $contact->browser : null
+                isset($contact->source) ? $contact->source : null,
+                isset($contact->browser) ? $contact->browser : null
             );
         },
         json_decode($contacts));

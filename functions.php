@@ -8,7 +8,7 @@ require_once 'mail/NewsletterCampaign.php';
 use Mail\Mail;
 use Contact\Contact;
 use Mail\NewsLetterCampaign;
-// TODO check user list
+
 function getBrowser()
 {
   $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -170,8 +170,9 @@ function handleMailToAll() {
     NewsLetterCampaign::storeNewsletterCampaign($subject,$htmlBody, $contacts);
 
     $newsletterCampaign = NewsLetterCampaign::getLastNewsletterCampaign();
+    ignore_user_abort(true);
     $response = NewsLetterCampaign::sendNewsletterCampaign($newsletterCampaign);
-// TODO ABORT USER CONNECt
+
     echo json_encode($response);
 }
 
@@ -183,7 +184,7 @@ function handleGetAllMails() {
         print_r(json_encode("Token expiry"));
         return;
     }
-    $contacts = Contact::getAllMailContacts();
+    $contacts = Contact::getAllMailContactsDTO();
     print_r(json_encode($contacts));
 }
 
