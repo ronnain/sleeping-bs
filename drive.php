@@ -79,6 +79,7 @@ function getFileDriveContentByName($articleName){
 
 function formatDriveDocContent($htmlContent) {
     $htmlContent = preg_replace('/<head>.*<\/head>/', '', $htmlContent);
+
     // remove empty span
     $htmlContent = preg_replace('/<span style="[\w\-;:&#]+"><\/span>/', '', $htmlContent);
     $htmlContent = cleanSpanStyles($htmlContent);
@@ -90,6 +91,54 @@ function formatDriveDocContent($htmlContent) {
     $htmlContent = preg_replace('/\s*href="https:\/\/www\.google\.com\/url\?q=/', ' href="', $htmlContent);
     // utilisé pour les paramètres du lien href
     $htmlContent = preg_replace('/&[a-zA-Z0-9_= .:;()\-#&]*"/', '"', $htmlContent);
+
+    // Handle custom tag that google drive can not add
+    preg_match_all('/##\s*({.*?})\s*##/', $htmlContent, $htmlTagToAdd);
+    $toReplaceList = $htmlTagToAdd[0];
+    $associateDataList = array_map('html_entity_decode', $htmlTagToAdd[1]);
+
+    // handle simple html tag like #<strong>content</strong>#
+    // It needs to add a # before the open tag and a # after the closing tag
+    $chevronLeft = "&lt;";
+    $chevronRight = "&gt;";
+    $tagContent = "(?<tagContent>.*?)";
+
+    $htmlContent = preg_replace_callback('/#'. $chevronLeft . $tagContent . $chevronRight.'/', function($match) {
+        return "<" . $match['tagContent'] . ">";
+    }, $htmlContent);
+
+    $htmlContent = preg_replace_callback('/'. $chevronLeft . '\/' . $tagContent . $chevronRight.'#/', function($match) {
+        return "</" . $match['tagContent'] . ">";
+    }, $htmlContent);
+
+    foreach ($toReplaceList as $index => $toReplace) {
+        $associatedData = $associateDataList[$index];
+        $associatedData = str_replace('“', '"', $associatedData);
+        $associatedData = str_replace('”', '"', $associatedData);
+        $associatedData = str_replace('”', '"', $associatedData);
+        $associatedData = json_decode($associatedData);
+
+        $replaceContent = "";
+        switch ($associatedData->htmlTag) {
+            case 'details':
+                if ($associatedData->type == "open") {
+                    $styles = "style=\"". (empty($associatedData->data->styles) ? '' : $associatedData->data->styles) . "\"";
+                    $replaceContent = "<details ". $styles ."><summary>". $associatedData->data->summary ."</summary>";
+                }
+                if ($associatedData->type == "end") {
+                    $replaceContent = "</details>";
+                }
+                break;
+
+            default:
+                # code...
+                break;
+        }
+
+        $htmlContent = preg_replace("/" . preg_quote($toReplace, '/') . "/", $replaceContent, $htmlContent);
+    }
+
+
     return $htmlContent;
 }
 
@@ -241,20 +290,23 @@ function cleanSpanStyles($htmlContent) {
             }
             // text decoration
             if (!empty($matches[4])) {
-                $styles .= handleStyles($matches[3], $matches[4], "none");
+                $styles .= handleStyles($matches[3], $matches[4], "none"); // TODO V2RIFIER LES LIENS
             }
-            // color
-            if (!empty($matches[6])) {
-                $styles .= handleStyles($matches[5], $matches[6], "000000");
-            }
-            // font size
-            if (!empty($matches[8])) {
-                $styles .= handleStyles($matches[7], $matches[8], "11pt");
-            }
-            // font size
-            if (!empty($matches[10])) {
-                $styles .= handleStyles($matches[9], $matches[10], "normal");
-            }
+
+
+            // ! I remove the color and font-size, because google drive always add color and a font size that I can not detect by default (maybe it is possible with test, but j'ai la flemme)
+            // // color
+            // if (!empty($matches[6])) {
+            //     $styles .= handleStyles($matches[5], $matches[6], "000000");
+            // }
+            // // font size
+            // if (!empty($matches[8])) {
+            //     $styles .= handleStyles($matches[7], $matches[8], "11pt");
+            // }
+            // // font size
+            // if (!empty($matches[10])) {
+            //     $styles .= handleStyles($matches[9], $matches[10], "normal");
+            // }
             // Warning : dont change simple quote to double quote, ortherwise the styles will be removed
             return !empty($styles) ? "<span style='$styles'>" : "<span>";
         },

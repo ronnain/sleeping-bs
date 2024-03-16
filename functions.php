@@ -3,7 +3,7 @@ require_once 'bddFunctions.php';
 require 'img.php';
 require_once 'contact/contact.php';
 require_once 'mail/Mail.php';
-require_once 'mail/NewsletterCampaign.php';
+require_once 'mail/NewsLetterCampaign.php';
 
 use Mail\Mail;
 use Contact\Contact;

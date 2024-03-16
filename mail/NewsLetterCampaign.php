@@ -118,8 +118,15 @@ class NewsLetterCampaign {
 
         $mailAddressSend = [];
 
+        $awaitMailSend = 0;
 
         foreach ($newsletterCampaign->contacts as $contact) {
+            $awaitMailSend++;
+
+            if ($awaitMailSend % 300 == 0) { // Wait 5 minutes before sending the other mails
+                sleep(5*60);
+            }
+
             $subscriberMail = $contact->mail;
             if (array_search($subscriberMail, $mailAddressSend) !== false) {
                 continue;
